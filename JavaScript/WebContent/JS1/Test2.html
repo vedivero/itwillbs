@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+     // id : itwill001
+     // pass : it8030909
+     var id = "itwill001";
+     var pass = "it8030909";
+     
+     // 사용자로 부터 아이디, 비밀번호를 입력 (prompt())
+     // 아이디가 같은 경우, 비밀번호 체크
+     //                 O - 회원 " 아이디님 환영합니다. "(로그인성공)(alert())
+     //                 X - "비밀번호 다릅니다." 에러 메세지 (alert())
+     // 아이디가 다른경우, "존재하지 않는 회원입니다." 에러 메세지(alert())
+     
+     /* var InputID = prompt("사용자 ID를 입력하시오","");
+   
+     
+     if(InputID == id){
+    	 // 아이디가 같다.
+    	 // alert("존재 하는 회원 입니다.");
+    	 var InputPass = prompt("사용자 PASS를 입력하시오", "");
+    	 if(InputPass == pass){
+    		 // 로그인 성공
+    		 alert(InputID+"님 환영합니다.");
+    	 }else{
+    		// 아이디는 같지만, 비밀번호가 다른경우 
+    		alert("비밀번호 다릅니다.");
+    		// 페이지 새로고침(F5)
+       	 	location.reload();
+    	 }    	 
+     }else{
+    	 // 아이디가 다르다.
+    	 alert("존재하지 않는 회원입니다.");
+    	 // 페이지 새로고침(F5)
+    	 location.reload();
+     } */
+     
+     // switch - case 문
+     
+//       switch(정수식){ // 숫자,문자
+//       	case "값":
+//     	   ...;
+//     	   [break;]
+//     	case "값":
+//      	   ...;
+//      	   [break;]
+//    	    default:
+//     		...;
+      
+//       }
+     // switch ~ case문
+     // 각각의 case를 만나서 해당 동작을 실행
+     // 각 case에 break;문이 없을경우  다음 break;문을 찾을때 까지
+     // 모든 문장을 실행한다.
+     // - default문을 만나면 종료된다(가장 마지막 작업)
+     
+        var num = "자바";
+     
+        switch(num){
+        case "자바":
+        	document.write("자바");
+        	break;   
+        
+        case "itwill":
+        	document.write("itwill<br>");
+        	
+        case 10:
+        	document.write("10<br>");
+        	//break;
+        case 9:
+        	document.write("9<br>");
+//         	break;
+        case 8:
+        	document.write("8<br>");
+            //break;
+            // ....
+        	
+        default:
+           document.write("해당 사항 없음");
+           //break;
+        }
+        
+        ////////////////////////////////////////////
+        // 학생의 성적입력(점수)을 받아서 점수따른 학점을 출력
+		// 100     : A
+		// 99 ~ 90 : A
+		// 89 ~ 80 : B
+		// 79 ~ 70 : C
+		// 69 ~ 60 : D
+		// 59 ~ 0 : F
+		// " 학생의 점수 : 00점 , 학점 : A" 
+		// switch - case문을 사용
+		
+		var score = prompt("학생의 점수 입력  ","");
+		
+        var tmp = Math.floor(score / 10);
+        alert("tmp ="+tmp);
+        console.log("tmp ="+tmp);
+        var grade = "";
+        
+        switch(tmp){
+        case 10:
+        case 9:
+        	//document.write("A");
+        	grade="A";
+        	break;
+        case 8:
+        	//document.write("B");
+        	grade="B";
+        	break;
+        case 7:
+        	//document.write("C");
+        	grade="C";
+        	break;
+        case 6:
+        	//document.write("D");
+        	grade="D";
+        	break;
+        default:
+        	//document.write("F");
+        	grade="F";
+        } // switch-case 끝
+        
+        document.write(grade);	
+        
+        //////////////////////////////////////////////////////
+        
+        // 사용자로부터 포털사이트(홈페이지) 이름을 입력 받아서 (prompt)
+        // 해당 페이지로 이동하는 동작 ("네이버","naver","NAVER","google")
+        //                      ("네이트","daum","youtube")
+        // switch-case문 사용 비교 
+        // 네이버 : "https://www.naver.com"
+        // 구글 :  https://www.google.com
+        // 네이트 : https://www.nate.com/
+        // 다음 : https://www.daum.net/
+        // 유튜브 : https://www.youtube.com/
+        // * 특정 페이지로 이동        
+        // location.href="https://www.naver.com";
+        
+        var url = prompt("이동하고 싶은 페이지 이름을 작성하시오.(구글,네이버,다음)", "");
+        
+        var site;
+        
+        switch(url){
+        case "NAVER":
+        case "naver":
+        case "네이버":
+        	//location.href="https://www.naver.com";
+        	site="www.naver.com";
+        	break;
+        case "구글":
+        	//location.href="https://www.google.com";
+        	site="www.google.com";
+        	break;
+        case "네이트":
+        	location.href="https://www.nate.com";
+        	break;
+        case "다음":
+        	location.href="https://www.daum.net";
+        	break;
+        case "유튜브":
+        	location.href="https://www.youtube.com";
+        	break;   	
+        }
+        
+        if(site){   // Boolean()    
+           location.href="https://"+site;
+        }
+        
+        
+        
+        
+        
+     
+     
+     
+   </script>
+
+
+
+
+
+
+</body>
+</html>

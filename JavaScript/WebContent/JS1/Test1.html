@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<!-- localhost : 자신의 IP주소(127.0.0.1) -->
+	<!-- ctrl + shift + (/)(c)  : 주석 -->
+	<!-- ctrl + d : 코드라인 한줄 삭제 -->
+	<!-- ctrl + shift + f : 코드 정렬 (html 코드에서는 이상하게 정렬될수 있음) -->
+	<!-- tab : 오른쪽으로 이동, shift + tab : 왼쪽으로 이동  -->
+	<!-- ctrl + f11 : 실행 -->
+	<!-- ctrl + space : 자동완성 -->
+
+	<script type="text/javascript">
+		// 제어문 : 프로그램의 흐름을 제어하는 실행문
+		// -조건문(분기문) : if~else
+		// -선택문 : switch~case
+		// -반복문 : for, while
+
+		// if문	
+		//if(조건식){
+		//	조건식이 참일때 실행하는 문장
+		//}
+
+		// 변수 num = 150  값이 양수
+		var num = 150;
+
+		if (num > 0) {
+			document.write("양수입니다.<br>");
+			document.write("양수입니다.<br>");
+			document.write("양수입니다.<br>");
+			document.write("양수입니다.<br>");
+			document.write("양수입니다.<hr>");
+		}
+
+		// -> 항상 true값을 가지고 있기 때문에 항상 실행되는 문장이다.
+		if (true) {
+			document.write("음수입니다.<br>");
+		}
+
+		// Boolean(값) => T/F
+		// Boolean(데이터) : 숫자0,null,undefined 값이 아닌경우
+		// 항상 true 값을 돌려준다.
+		if (2) {
+			document.write("1을 실행합니다.<br>");
+		}
+
+		if (num < 0)
+			document.write("<h1>양수입니다.</h1>");
+		//=> 중괄호가 없을경우 한줄까지만 영향을 준다.
+		document.write("<h1>양수입니다.2</h1>");
+
+		var value = prompt("양수,음수중 하나의 숫자를 입력하시오.", "0");
+
+		// 양수/음수를 판별해서 출력
+		// " 00(양수)" "-00(음수)"
+		if (value > 0) {
+			document.write(value + "(양수)<br>");
+		}
+		if (value < 0) {
+			document.write(value + "(음수)<br>");
+		}
+
+		// else 문 : if문을 제외한 나머지를 나타낼때 사용
+		// (그외 나머지)
+
+		// 변수 num = 15 초기화
+		// 값 -> 홀수/짝수 판별
+
+		var num = 12;
+		if (num % 2 == 0) {
+			document.write("짝수");
+		}
+		if (num % 2 != 0) {
+			document.write("홀수");
+		}
+
+		// num%2 == 1 //홀수 
+		if (num % 2 == 0) {
+			document.write("짝수");
+		} else {
+			document.write("홀수");
+		}
+
+		var tmp = confirm("회원 탈퇴 하시겠습니까?");
+
+		alert(tmp);
+
+		// 확인 버튼 클릭 : "회원 탈퇴 성공!"
+		// 취소 버튼 클릭 : "회원 탈퇴 실패!"
+		if (tmp == true) {
+			document.write("회원 탈퇴 성공");
+		} else {
+			document.write("회원 탈퇴 실패");
+		}
+
+		// if ~ else if() ~ else  문법
+		// 		if(){
+		// 		}else if(){
+		// 		}else if(){
+		// 		}else{
+		// 		}
+		
+		var month = prompt("해당 월을 입력하시오.", "0");
+		// 3~5 => "봄"
+		// 6~8 => "여름"
+		// 9~11 => "가을"
+		// 12~2 =>" 겨울"
+		
+		//if(month == 3 || month == 4 || month == 5){
+		if(3 <= month && month <= 5){	
+			// 봄
+			document.write("봄");
+		}else if(6 <= month && month <= 8){
+            // 여름	
+			document.write("여름");
+		}else if(9 <= month && month <= 11){
+			// 가을
+			document.write("가을");
+		}else if(1<= month && month <=2) {
+			// 겨울
+			document.write("겨울");
+		}else if(month == 12) {
+			// 겨울
+			document.write("겨울");
+		}else if(month == 12 || (1<= month && month <=2) ) {
+			// 겨울
+			document.write("겨울");
+		}else{
+			document.write("1~12월을 입력해주세요");
+		}
+		
+		// 학생의 성적입력(점수)을 받아서 점수따른 학점을 출력
+		// 100 ~ 90 : A
+		// 89 ~ 80 : B
+		// 79 ~ 70 : C
+		// 69 ~ 60 : D
+		// 59 ~ 0 : F
+		// " 학생의 점수 : 00점 , 학점 : A"
+	    	
+    	var score = prompt(" 학생의 점수를 입력하시오. ","0");
+		
+		if(90 <= score && score <= 100){
+			document.write("<h1>학생의 점수 : "+score+",학점 : A<h1>");
+		}else if(80 <= score && score <= 89){
+			document.write("<h1>B<h1>");
+		}else if(70 <= score && score <= 79){
+			document.write("<h1>C<h1>");
+		}else if(60 <= score && score <= 69){
+			document.write("<h1>D<h1>");
+		}else if(0 <= score && score <= 59){
+			document.write("<h1>F<h1>");
+		}else{
+			document.write(" 0~100 사이의 값을 입력해주시오. ")
+		}
+		
+		
+		if(0 <= score && score <= 100){
+			//0 ~ 100
+			if(90 <= score && score <= 100){
+				document.write("<h1>학생의 점수 : "+score+",학점 : A<h1>");
+			}else if(80 <= score && score <= 89){
+				document.write("<h1>B<h1>");
+			}else if(70 <= score && score <= 79){
+				document.write("<h1>C<h1>");
+			}else if(60 <= score && score <= 69){
+				document.write("<h1>D<h1>");
+			}else if(0 <= score && score <= 59){
+				document.write("<h1>F<h1>");
+			}
+		}else{
+			// 0~100 아닌값
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</script>
+
+</body>
+</html>

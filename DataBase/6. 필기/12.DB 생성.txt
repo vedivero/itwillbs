@@ -1,0 +1,40 @@
+<DB 생성 방법>
+1.자동 - DBCA tool
+2.수동 - SQL Plus tool
+
+<DB 전환 방법>
+$] export ORACLE_SID=resp
+$] sqlplus /nolog
+SQL> conn sys/oracle as sysdba => resp로 접속됨
+(==)
+$] sqlplus "sys/oracle as sysdba"
+
+<Oracle DB Tool>
+-SQL Plus : 터미널 환경의 Tool
+	    쿼리구문(관리명령어 포함)을 입력/실행/결과 확인
+	    DBA, 일반 User(개발자) 모두 사용 가능
+-SQL Developer : 그래픽 환경의 Tool
+		 쿼리구문만을 입력/실행/결과 확인
+		 일반 User(개발자)가 사용함
+-DBCA : 그래픽 환경의 Tool
+	DB 생성 및 삭제를 도와줌
+-EM : 웹브라우저 환경의 Tool
+      DB 관리를 도와줌
+      DBA만 사용 가능
+      URL : https://localhost:1158/em
+                      ↓         ↓
+                 DB가 존재하는   port#
+ 	    Server의 Host명(IP주소)
+
+
+
+
+
+
+
+
+
+
+
+
+

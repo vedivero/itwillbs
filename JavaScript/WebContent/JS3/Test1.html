@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>window 객체</title>
+</head>
+<body>
+	<h1>WebContent/JS3/Test1.html</h1>
+
+	<script type="text/javascript">
+		// 브라우저 객체 모델(BOM)
+		// 브라우저 객체 : 계층적 구조  
+		// 
+		//    window(최상위)
+		// document 	screen		location	history		navigator
+		
+		// 객체명.속성  // 객체명.함수()
+		
+		// window.document.write(); (정확한 구조를 표현한 문장)
+		// document.write(); => window(최상위 객체)는 생략해서 사용한다.
+		
+		
+		// window 객체 : 브라우저 객체의 최상위 객체 
+		// 새창 열기 
+		// window.open("url주소","창이름","옵션");
+		// window.open("http://www.naver.com");
+		
+		document.write("<hr>");
+		function winOpen(){
+			// 새창 열기 작업
+			/*window.*/open("http://www.naver.com");
+		}
+		
+		// 버튼 "test5페이지 열기" 생성후
+		// 클릭시 해당 페이지로 이동(WebContent/JS2/Test5.html)
+		
+		// ../ : 상위 폴더로 이동
+		function test5Open(){
+			window.open("../JS2/Test5.html","TESTPAGE","width=200,height=300,top=300,left=600");
+		}
+		
+		// 페이지 종료 (현재페이지를 종료)
+		// window.close();
+		
+		// /WebContent/JS3/Test1_1.html 페이지 생성
+		// -> "안녕하세요" 출력후 옆에 버튼 하나를 생성 
+		// 버튼 클릭시 창 종료 
+		
+		// => Test1 페이지 에서 버튼"Test1_1 열기" 새창 열기로
+		// 페이지 열기 크기(W:400,H:200) 위치(T:400,L:600)
+		function winOpen2(){
+			window.open("Test1_1.html","","width=400,height=200,top=400,left=600");
+		}
+		
+		//window.alert("message");
+		//       confirm("Test");
+		//       prompt();
+		//       setInterval("자바스크립트 실행문",시간(1/1000));
+		
+		//var i=0;
+		//var inter = setInterval("console.log(i++);",300); // 3초
+		//clearInterval(inter);
+		
+		
+		
+		document.write("<hr>");
+		
+		
+		
+		
+
+		// 이벤트 : 브라우저에서 사용자가 취하는 모든 행동 
+		// 이벤트 리스너 : 이벤트 발생정보를 체크해서 해당 핸들러로 전달 
+		// 이벤트 핸들러 : 이벤트 발생시 특정 동작을 처리해주는 동작  
+		//            => JS 함수를 실행시켜서 작동, 스타일정보 변경 가능
+	</script>
+
+	<input type="button" value="버튼" onclick="alert('버튼 클릭');">
+	<br>
+	<input type="button" value="버튼2" ondblclick="alert('버튼 더블클릭');">
+	<br>
+	<input type="button" value="버튼3" onmouseover="alert('마우스 오버 작동');">
+	<br>
+
+	<input type="text" name="txt" onkeyup="alert('키 업 이벤트 발생');">
+	<hr>
+
+
+	<table>
+	  <!-- tr 배경색은 노란색(yellow), 마우스오버 : green,
+	                  마우스사라질때 원래 색으로 돌아오기 -->
+	  <tr bgcolor="yellow" onmouseover="style.background='green'" 
+	      onmouseout="style.background='yellow'"
+	  >
+	     <td>이름</td>
+	     <td>나이</td>
+	  </tr>
+	   <tr bgcolor="yellow" onmouseover="style.background='green'" 
+	      onmouseout="style.background='yellow'">
+	     <td>1번학생</td>
+	     <td>22</td>
+	  </tr>
+	   <tr bgcolor="yellow" onmouseover="style.background='green'" 
+	      onmouseout="style.background='yellow'">
+	     <td>2번학생</td>
+	     <td>33</td>
+	  </tr>
+	   <tr bgcolor="yellow" onmouseover="style.background='green'" 
+	      onmouseout="style.background='yellow'">
+	     <td>3번학생</td>
+	     <td>44</td>
+	  </tr>
+
+
+	</table>
+	
+	<hr>
+	<h1>window 객체</h1>
+	
+	<input type="button" value="새창열기" 
+	       onclick="winOpen();">
+	       
+	<input type="button" value="Test5 페이지 이동"
+	       onclick="test5Open();"    >
+	<input type="button" value="Test1_1 열기"
+	       onclick="winOpen2();"
+	>	
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

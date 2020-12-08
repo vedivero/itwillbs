@@ -1,0 +1,28 @@
+
+[ 효과 ]
+ -> 선택된 요소의 모습을 다양하게 표현 메서드
+ 
+  hide():
+  show():
+  toggle():
+  
+  fadeIn():
+  fadeOut():
+  fadeToggle():
+  fadeTo():
+  
+  slideDowon():
+  slideUp():
+  slideToggle():
+  animate():
+  
+
+
+
+[ 애니메이션 ]
+
+
+
+
+
+

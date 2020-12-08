@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD : 해당문서의 저장되는 데이터 지정 -->
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <!-- 타겟 클래스 객체(빈) 생성 -->
+    <bean id="calcTarget" class="com.itwill.aop.Calculator"/>
+    
+    <!-- 로그 기능처리하는 어드바이스 객체(빈) 생성 -->
+    <bean id="logAdvice" class="com.itwill.aop.LoggingAdvice"/>
+    
+    <!-- 스프링 프레임워크에서 제공하는 객체 사용 -->
+    <bean id="proxyCalc" class="org.springframework.aop.framework.ProxyFactoryBean">
+      <!-- 타겟 클래스를 지정 -->
+      <property name="target" ref="calcTarget"/>
+      
+      <!-- 어드바이스 클래스를 지정 -->
+      <!-- 타겟클래스에서 메서드 호출시 logAdvice 객체 실행 -->
+      <property name="interceptorNames">
+        <list>
+          <value>logAdvice</value>
+        </list>      
+      </property>
+    
+    </bean>
+    
+    
+    
+   
+   
+
+
+</beans>
+ 
+
+
+

@@ -1,0 +1,26 @@
+<Top-N 분석>
+ex1) employees 테이블에서 최하위 소득자 5명의 last_name, salary를 
+출력하는 구문을 작성하시오.
+SQL> select rownum as rank, last_name, salary
+     from (select last_name, salary
+	   from employees
+           order by salary asc)
+     where rownum <= 5;
+
+ex2) employees 테이블에서 가장 최근에 입사한 사원 10명의
+employee_id, last_name, hire_date를 출력하는 구문을 작성하시오.
+SQL> select rownum as rank, employee_id, last_name, hire_date
+     from (select employee_id, last_name, hire_date
+           from employees
+           order by hire_date desc)
+     where rownum <= 10;
+
+ex3) employees 테이블에서 가장 예전에 입사한 사원 10명의
+employee_id, last_name, hire_date를 출력하는 구문을 작성하시오.
+SQL> select rownum as rank, employee_id, last_name, hire_date
+     from (select employee_id, last_name, hire_date
+           from employees
+           order by hire_date asc)
+     where rownum <= 10;
+
+

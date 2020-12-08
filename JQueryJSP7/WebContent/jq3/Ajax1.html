@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+   // XMLHttpRequest 객체: Ajax처리, 데이터 송수신 처리 객체
+   
+   /*
+    [XMLHttpRequest 객체]
+    onreadystatechange 이벤트 핸들러 => readyState 프로퍼티 전달
+        통신 상태가 변경될때 마다  호출되는 이벤트 핸들러
+    => Ajax처리 방식은 서버의 응답시간을 알수 없기 때문에  서버의 응답을 처리해주는
+     이벤트 객체가 필요하다.
+    
+    readyState -> http통신 결과에 따라서 5가지 형태 결과
+	    리턴 0 : 초기화 X (open메서드 호출 X)
+	    리턴 1 : 로드중 (open메서드 호출 O, send메서드 호출 X)
+	    리턴 2 : 로드완료 (send메서드 호출 O, 응답 status/header 미처리)
+	    리턴 3 : 일부 응답 처리 완료 (응답 status/header 처리O, 본문 미처리)
+	    리턴 4 : 모든 응답 처리 완료
+    
+	status -> http 통신의 상태를 표시하는 코드값
+	https://developer.mozilla.org/ko/docs/Web/HTTP/Status
+	   리턴 200 : OK (정상처리)
+          리턴 401 : Unauthorized( 인증 필요 )
+          리턴 403 : Forbidden( 액세스 거부 )
+          리턴 404 : Not Found(페이지 요청 자원 없음)
+          리턴 505 : Internal Server Error(서버 내부 에러)
+	   리턴 503 : Service Unavailable(요처 서버 사용 불가)
+          
+    
+    
+    
+   
+   */
+   
+   var xhttp;
+   
+   // XMLHttpRequest 객체 생성 함수
+   function createHttpRequest(){
+	   xhttp = new XMLHttpRequest();
+   }
+   
+   function mySend(){
+	   // createHttpRequest() 호출해서 XMLHttpRequest 객체를 생성
+	   createHttpRequest();
+	   
+	   // 서버의 응답처리 - onreadystatechange 프로퍼티
+	   xhttp.onreadystatechange = callFunction;
+	   
+	   // callFunction-> readyState 상태값이 4,status 값200일때  정상처리
+	   // 원하는 파일(페이지)을 읽어서 처리
+	   
+	   // open() - 메서드 처리방식(get/post),URL,동기(false)/비동식(true)
+	   xhttp.open("GET","sample.txt",true);
+	   
+	   // open() 초기화 -> send() 실제 페이지 요청
+	   // GET방식처리 
+	   xhttp.send(null);
+	   
+	   
+	   // GET방식처리  - 주소줄에 파라미터값 가지고 이동
+		// 	   xhttp.open("GET","URL?name=홍길동&age=10",true);
+			   
+		// 	   xhttp.send(null);   
+	   
+	   // POST 방식처리 - 본문에 파라미터값 가지고 이동
+	   
+		// 	   xhttp.open("POST","URL",true);
+			   
+		// 	   xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");	   
+			   
+		// 	   xhttp.send("name=홍길동&age=10");
+   }
+   
+   function callFunction(){
+	   // 서버와 클라이언트 간의 통신을 완료한 시점 결정
+	   // readyState 리턴값이 4일때, 상태 정보(status) 200일때
+	   if(xhttp.readyState == 4){
+		   if(xhttp.status == 200){
+		    // 파일을 읽어와서 태그에 내용을 추가
+		    // 응답 데이터 형식은 responseText 프로퍼티를 사용해서
+		    // 일반 텍스트 파일의 값을 읽어온다.
+		      var responseData = xhttp.responseText;
+		     
+		    // div 태그에 전달받은 값을 추가 
+		    document.getElementById("result").innerHTML = responseData;
+			   
+		   }
+	   }   
+   }
+   
+      
+   
+   
+
+</script>
+
+</head>
+<body>
+	<h1>WebContent/jq3/Ajax1.html</h1>
+	
+	
+	페이지 작성시 구현한 텍스트 입니다.<br>
+	
+	<!-- 
+	   버튼을 하나 생성해서 버튼 클릭시 서버에 있는 특정 파일의 정보를 불러와서
+	   원하는 위치에 내용을 추가해보기 (화면 전환 X)	
+	 -->
+	 
+	 <input type="button" value="파일 가져오기" onclick="mySend()">
+	 <hr>
+	 <div id="result"></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</body>
+</html>

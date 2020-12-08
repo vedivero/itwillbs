@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>WebContent/JS1/Test3.html</h1>
+	<h1>반복문</h1>
+
+	<script type="text/javascript">
+		// for/while
+
+		// for문
+		//       for(초기식;조건식;증감식){
+		//     	  반복문장;
+		//       }
+		// for문 1~10 까지 숫자 가로 출력
+
+		//document.write("1");
+		//document.write("2");
+		for (var i = 1; i <= 10; i++) {
+			document.write(i + " ");
+		}
+
+		// for문 11~20 까지 숫자 세로 출력
+		for (var i = 11; i <= 20; i++) {
+			//document.write(" <br> "+i);
+			document.write(" <h5>" + i + "</h5> ");
+		}
+
+		// for문 숫자 10개 출력  0 ~ 9 (가로)
+		for (var i = 0; i < 10; i++) {
+			document.write(i + " ");
+		}
+
+		document.write("<br>");
+		// for문 사용 1~10 까지 숫자 중에서 홀수만 출력
+		// 1 3 5 7 9
+		for (var i = 1; i <= 10; i += 2) { // i = i+2 
+			document.write(i + " ");
+			//document.write((i++)+" ");
+			//i++;
+		}
+		for (var i = 1; i <= 10; i++) { // i = i+2 
+			if (i % 2 != 0)
+				document.write(i + " ");
+		}
+		document.write("<br>");
+		// 1~10까지 수 중에서 짝수만 출력
+		// 2 4 6 8 10
+		for (var i = 0; i <= 10; i += 2) { // i = i+2 
+			document.write(i + " ");
+		}
+		document.write("<br>");
+
+		// 1~50까지 숫자 출력 (for, if-else)
+		// 5의 배수이면서, 7의 배수가 아닌경우 - RED
+		// 7의 배수이면서, 5의 배수가 아닌경우 - BLUE
+		// 5의 배수 이면서, 7의 배수인경우 - GREEN
+
+		for (var i = 1; i <= 50; i++) {
+			if (i % 5 == 0 && i % 7 != 0) {
+				document.write("<font color='RED'> " + i + " </font>");
+			} else if (i % 7 == 0 && i % 5 != 0) {
+				document.write("<font color='BLUE'> " + i + " </font>");
+			} else if (i % 5 == 0 && i % 7 == 0) {
+				document.write("<font color='GREEN'> " + i + " </font>");
+			} else {
+				document.write(i + " ");
+			}
+			
+			if( i%10 == 0 ){
+				document.write("<br>");
+			}
+			
+		}
+		document.write("<hr>");
+		
+		// 구구단 출력  -> 단 수 상관없이 사용할수 있는 구구단
+		// < 2단 >
+		// 2 * 1 = 2
+		// 2 * 2 = 4
+		// 2 * 3 = 6
+		//   ....
+		// 2 * 9 = 18
+		
+		var dan = prompt("단을 입력하시오", "0");
+		
+		document.write("< "+dan+"단 > <br>");
+		for(var i=1;i<=9;i++){ // 1~9
+			document.write(dan+" * "+i+" = "+(dan * i)+"<br>");
+		}
+		
+		// 누적 합 계산하기 
+		// 1 ~ 10까지의 숫자를 모두 더한 값을 출력 
+		var sum = 0;
+		for(var i = 1;i<=10;i++){
+			// 1+2+3+4+ ... + 10
+			sum += i; // <=> sum = sum + i;
+			document.write("i = "+i+", sum = "+sum+"<br>");
+		}
+		
+		document.write("sum = "+sum);
+		
+	</script>
+
+	<h4>font 태그 사용해서 글자 색 변경</h4>
+	<font color="red">Hello</font>
+	
+	
+	<script type="text/javascript">
+	  // while문
+		// 초기식;
+		// while(조건식){
+		//   반복할문장;
+		// 	  증감식;
+		// }
+		
+		document.write("<hr>");
+		// 1 ~ 10 까지 숫자 출력
+		var i=1;
+		while(i<=10){
+			document.write(i+" ");
+			i++;
+		}
+		document.write("<hr>");		
+		// 1 ~ 10까지 숫자중 짝수만 출력
+		var i=2;
+		while(i<=10){
+			document.write(i+" ");
+			i+=2;
+		}
+		document.write("<hr>");
+		// 100,99,98,...., 1
+		// => 모든 수의 합을 출력( while )
+		var i = 100;
+		var sum = 0;
+		while(i >= 1){
+			//document.write(i+"<br>");
+			sum += i;			
+			i--;
+		}
+		document.write("sum : "+sum);
+		
+		document.write("<hr>");
+		
+		var i=1;
+		while(++i <= 4){
+			document.write(i+" ");
+		}
+		
+		document.write("<hr>");
+		// do-while()문
+		// 조건 비교하기전에  한번 실행후 조건 비교한다.
+		
+
+		// 초기식;
+		// 	do{
+		//   반복문장;
+		// 	  증감식;
+		// 	}while(조건식);
+		
+		var i = 1;
+		do{
+			document.write(i+" ");
+			i++;
+		}while(i>=10);
+		
+		document.write("<hr>");
+		//var i = 1;
+		
+		for(var i=1;i<=10;i++);
+			document.write(i+" ");
+		// if,for 중괄호 없이는 한줄만 영향을 준다.
+		
+		
+		// 반복문 안에 반복문 (다중반복문)
+		
+// 		for(초기식;조건식;증감식){
+// 			반복할문장;
+// 			for(초기식;조건식;증감식){
+// 				반복할문장;
+// 			}
+// 			반복할문장;
+// 		}
+		
+		
+		document.write("<hr>");
+		
+		for(var i=1;i<=5;i++){
+			for(var j=1;j<=3;j++){
+				document.write("i = "+i+", j = "+j+" <br>");
+			}
+		}
+		// 구구단 출력 
+		// < 2단 > 
+		// 2 * 1 = 2
+		// 2 * 2 = 4
+		//    ...
+		// < 9 단 > 
+		//  ...
+		// 9 * 9 = 81
+		
+		
+		document.write("<hr>");
+		
+		for(var dan=2;dan<=9;dan++){
+			document.write("< "+dan+"단 > <br> ");
+			for(var i = 1;i<=9;i++){
+				document.write(dan+"*"+i+"="+(dan*i)+"<br>");
+			}			
+		}
+		
+		// * 숙제 
+		// 구구단 가로 출력  (for-2개만,다른문법 제한 없음)
+		// <2단><3단><4단>....<9단>
+		// 2*1=2 3*1=3 4*1=4 ... 9*1=9
+		// 2*2=4                 9*2=18
+		
+// 		for (var dan = 2; dan <= 9; dan++) {
+// 			document.write("< "+dan+" 단 > " );
+// 		}
+// 		document.write("<br>");
+
+		for (var i = 0; i <= 9; i++) {
+			for (var dan = 2; dan <= 9; dan++) {
+				if(i == 0){
+				  document.write("< "+dan+"단 >");
+				}else{
+  				  document.write(dan + "*" + i + "=" + (dan * i) + " ");
+				}
+			}
+			document.write("<br>");
+		}
+
+		// * 반복문을 사용해서 표를 그리기
+		//   1~12까지의 숫자를 넣어서 출력
+		//   1  2  3
+		//   4  5  6
+		//   7  8  9
+		//   10 11 12
+
+		var tag = "<table border='1'>";
+
+		for (var i = 1; i <= 4; i++) {
+			tag += "<tr>";
+			tag += "<td>1</td>";
+			tag += "<td>2</td>";
+			tag += "<td>3</td>";
+			tag += "</tr>";
+		}
+		tag += "</table>"
+
+		document.write(tag);
+	</script>
+	
+	<table border="1">
+	  <tr>
+	    <td>열1</td>
+	    <td>열2</td>
+	    <td>열3</td>
+	  </tr>
+	  <tr>
+	    <td>열4</td>
+	    <td>열5</td>
+	    <td>열6</td>
+	  </tr>
+	   <tr>
+	    <td>열7</td>
+	    <td>열8</td>
+	    <td>열9</td>
+	  </tr>
+	   <tr>
+	    <td>열10</td>
+	    <td>열11</td>
+	    <td>열12</td>
+	  </tr>
+	
+	</table>
+
+
+
+
+
+
+
+</body>
+</html>

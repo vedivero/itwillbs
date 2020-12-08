@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>WebContent/JS3/Test2.html</h1>
+
+	<script type="text/javascript">
+	  // window-document-image	
+	  
+	  // 이미지태그에 접근해서 속성을 사용
+	  
+	  function fun1(){
+		  //document.write("이미지 태그의 이름 : "+window.document.images[0].name);
+		  // document 객체(현재 html 페이지를 의미함)
+		  alert("name : "+document.img1.name);
+		  alert("src : "+document.img1.src);
+		  // 테두리 :border
+		  alert("border : "+document.images[0].border);
+		  // 크기 (가로,세로) width,height		  
+		  alert("width,height : "+document.img1.width+","+document.images[0].height);
+	  }
+	  
+	  // 버튼 생성 이미지의 속성정보를 변경
+	  // 테두리 3지정, 가로200세로150 ,이미지를  2.jpg로 변경
+	  function fun2(){
+		  document.img1.border=3;
+		  document.images[0].width=200;
+		  document.images[0].height=150;
+		  document.img1.src="2.jpg";	  
+	  }
+	  
+	  
+	  // 이미지 태그에 마우스 올리면(mouseover) ->
+	  // 태두리 2, 크기 200,150, 이미지를 1~6중에 아무거나 표시 
+	  // 이미지 태그에 마우스를 내리면 (mouseout) ->
+	  // 원래 상태로 돌아가기
+	 
+	  // 1~6까지 랜덤한값 생성
+	  //alert("random : "+( Math.floor(Math.random()*6)+1));
+	  
+	  var imgArr = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"];
+	  
+	  function changeImg(){
+		  //var rNum = Math.floor(Math.random()*6)+1; // 1~6
+		  var rNum = Math.floor(Math.random()*6); // 0~5
+		  
+		  document.images[0].border=2;
+		  document.img1.width=200;
+		  document.images[0].height=150;	
+		  
+		  //document.img1.src = rNum+".jpg";
+		  document.img1.src = imgArr[rNum];
+		  
+	  }
+	  function resetImg(){
+		  document.images[0].border=0;
+		  document.img1.width=80;
+		  document.images[0].height=60;	
+		  document.img1.src = "1.jpg";	
+	  }
+	  
+	 
+	  
+	  
+	  
+	</script>
+	
+	<img src="1.jpg" name="img1" 
+   	     onmouseover="changeImg();"
+   	     onmouseout="resetImg();"
+   	     ><br>
+	<input type="button" value="이미지 속성정보" onclick="fun1()"><br>
+	<input type="button" value="이미지 속성변경" onclick="fun2()"><br>
+	
+
+
+
+
+</body>
+</html>

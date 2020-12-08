@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD : 해당문서의 저장되는 데이터 지정 -->
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+ <beans>
+ 
+    <!-- Controller_Action  -->
+    <bean id="action" class="com.itwill.member.SelectMemberAction">
+      <property name="mdao2" ref="mdao"></property>
+      <!-- name="생성할 객체의 변수명,참조할 setter 이름"
+           ref="참조하는 객체의 변수명,받아오는 변수명"
+       -->
+    </bean>
+    <!-- Action_DAO -->
+    <bean id="mdao" class="com.itwill.member.MemberDAOImpl">
+    </bean>
+ 
+ </beans>
+
+
+
+
+

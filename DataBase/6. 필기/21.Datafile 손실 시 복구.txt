@@ -1,0 +1,44 @@
+<Datafile 손실 시 복구>
+[Case 1] Non-critical Datafile(일반 Datafile) 손실 시 복구
+** user01.dbf(file# : 4)이 손실된 경우 복구 절차
+(DB 켜는 중)				(DB 켜져 있는 중)
+1.DB mount됨(open X)		      1.DB open되고 운영 중 Datafile 손실됨
+2.손실된 Datafile만 Offline 시킴	      2.손실된 Datafile만 Offline 시킴
+S> alter database datafile 4 offline; S> alter database datafile 4
+3.DB open 시킴(DB 가용성)		         offline immediate;
+S> alter database open;		      3.DB open 유지함(DB 가용성)
+-----------------------------------------------------------------------	 
+4.restore : 백업로부터 손실된 Datafile만 복원
+$] cp  /home/oracle/backup/user01.dbf  /u01/.../datafile/user01.dbf
+5.recover : 복원된 Datafile만 복구(부분 DB 복구)
+S> recover datafile 4;
+6.복구가 완료된 Datafile Online 시킴
+S> alter database datafile 4 online;
+
+[Case 2] Critical Datafile(필수 Datafile-system,undo) 손실 시 복구
+** system01.dbf(file# : 1) 손실 시 복구
+1.DB 종료
+SQL> shut abort
+2.DB mount 시킴
+SQL> startup mount
+3.restore : 백업 파일로부터 손실된 Datafile만 복원
+$] cp  /home/oracle/backup/system01.dbf  /u01/.../datafile/system01.dbf
+4.recover : 모든 Datafile 복구(전체 DB 복구)
+SQL> recover database;
+5.DB open 시킴
+SQL> alter database open;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

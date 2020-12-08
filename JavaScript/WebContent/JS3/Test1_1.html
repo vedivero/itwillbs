@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>document 객체</title>
+</head>
+<body>
+  <h1>WebContent/JS3/Test1_1.html</h1>
+  <h1>안녕하세요</h1>
+  
+  <script type="text/javascript">
+     function winClose(){
+    	 window.close();
+     }
+  </script>
+  <input type="button" value="종료" onclick="winClose();">
+  
+  <h2>window.document 객체 </h2>
+  <!-- 해당 html문서를 객체화 한것 -->
+  
+  <script type="text/javascript">
+    // document 객체 -> 속성, 기능
+    // 문서의 제목
+    alert(window.document.title);
+    // 문서의 위치
+    alert(window.document.location);
+    alert(document.bgColor);
+    alert(document.fgColor);
+    
+    // 버튼 사용해서 버튼 클릭시 배경색을 변경
+    function fun1(){
+    	document.bgColor="orange";
+    	document.fgColor="yellow";
+    	
+    	alert("배경색 : "+document.bgColor);
+        alert("글자색 : "+document.fgColor);
+    }
+    
+    function fun2(c){
+    	// 라디오 버튼의 색상으로 배경색 변경
+    	document.bgColor = c;    	
+    }
+    function fun3(c){
+    	// 라디오 버튼의 색상으로 글자색 변경
+    	document.fgColor = c;    	
+    }
+    
+  </script>
+  
+    <input type="button" value="배경색 변경" onclick="fun1()">
+    <hr>
+    <!-- name의 속성값이 같아야 그룹으로 처리 가능(중복 X) -->
+    <h3>배경색</h3>
+    <input type="radio" name="color" value="red" onclick="fun2('red')"> RED
+    <input type="radio" name="color" value="green" onclick="fun2('green')"> GREEN
+    <input type="radio" name="color" value="blue" onclick="fun2('blue')"> BLUE
+     <hr>
+    <!-- name의 속성값이 같아야 그룹으로 처리 가능(중복 X) -->
+    <h3>글자색</h3>
+    <input type="radio" name="color1" value="red" onclick="fun3('red')"> RED
+    <input type="radio" name="color1" value="green" onclick="fun3('green')"> GREEN
+    <input type="radio" name="color1" value="blue" onclick="fun3('blue')"> BLUE
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+</body>
+</html>

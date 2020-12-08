@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD : 해당문서의 저장되는 데이터 지정 -->
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+ <!-- bean == 객체 
+           스프링이 제공하는 객체 
+  -->
+ <beans>
+   <!-- 객체 a = new 객체() -->
+   <!-- id="빈 객체의 고유한 이름, 외부에서 접근하는 이름"   -->
+   <!-- name="객체의 별칭"  -->
+   <!-- class="생성할 클래스 위치" -->
+   <!-- property="set()사용해서 값 주입" -->
+   <!-- constructor-arg="생성자 사용해서 값 주입" -->
+   
+   <!-- SubPerson sp = new SubPerson() 의미 -->
+   <bean id="personBean" class="com.itwill.spring.SubPerson">
+    <!-- sp.setName("홍길동1")의미 -->
+    <!-- 객체 안에있는 name변수에 값을 저장(자동으로 해당 set메서드 호출) -->
+    <property name="name">
+       <value>빈 사용자1</value> 
+    </property>
+    <property name="age" value="999"></property>
+   </bean>
+   
+   <bean id="adminBean" class="com.itwill.spring.SubPerson">
+    <property name="name" value="관리자"></property>
+    <property name="age">
+       <value>30</value>
+    </property>
+   </bean>
+ 
+ 
+ </beans>
+
+
+
+
+

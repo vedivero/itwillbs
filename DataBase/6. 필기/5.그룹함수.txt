@@ -1,0 +1,38 @@
+<Count 함수>
+-count(*) : null O, 중복값 O
+-count(expr) : null X, 중복값 O
+-count(distinct expr) : null X, 중복값 X
+
+(ex1) select count(*)
+      from employees
+      where department_id = 80;
+=> 80번 부서에 소속된 사원의 수가 출력됨
+
+(ex2) select count(commission_pct)
+      from employees
+      where department_id = 80;
+=> 80번 부서에 소속된 사원 중 커미션을 받는 사원의 수가 출력됨
+----------------------------------------------------------------
+(ex3) 전체 사원들의 커미션 평균을 출력하시오.
+[출력]  Avg_comm
+      ----------
+        OOOOOO
+[정답]
+SQL> select avg(nvl(commission_pct, 0)) as "Avg_comm"
+     from employees;
+
+[잘못된 답]
+SQL> select avg(commission_pct)
+     from employees;
+=> 커미션을 받는 사원들의 커미션 평균
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>WebContent/JS2/Test2.html</h1>
+
+	<script type="text/javascript">
+		// 객체(Object) => 자바스크립트는 객체기반의 언어 
+		// -> 객체는 기능,속성을 포함하고있는것
+		// -> "내 눈앞에 보이는 모든 대상"
+
+		// 모니터 객체 -> 기능 : 화면 조정,on/off,...
+		//          -> 속성 : 사이즈,브렌드,가격,....
+		// => 객체 추상화(객체 모델링)
+
+		// 스마트폰 -> 기능 : on/off,전화,문자,카톡,....
+		//        -> 속성 : 모델명,제조사,가격,색상,...
+
+		// => 추상화된 객체를 사용해서 사용시 
+		// 속성은 변수를 사용해서 표현, 기능은 함수(메서드)를 사용해서 표현
+
+		// var Phone(참조변수) = new Object();
+		// Phone.모델명 = "아이폰10";
+		// Phone.on();
+
+		// * JS 객체 종류
+		// - 내장 객체 
+		// - 브라우저 객체 모델(BOM:Browser Object Model)
+		// - 문서 객체 모델 (DOM:Document Object Model)
+
+		// * 내장 객체 : 자바스크립트(엔진)에 포함되어있는 객체.
+		//  String(문자),Date(날짜),Array(배열),Math(수학),....
+
+		// * BOM : 브라우저에 계층적으로 내장되어 있는 객체 
+		//   window,screen,location,history,navigator,document...
+
+		//  location.href ="주소";
+
+		// * DOM : HTML 태그(문서 구조) + CSS
+		// => IE8 이하의 버전에서 호환성이 많이 떨어짐. => 잘안씀
+		// => 제이쿼리 문서 객체 모델로 대신 사용
+
+		// * 내장 객체 
+		// var 참조변수 = new 생성함수();
+		// new : 객체(인스턴스)를 생성하는 연산자 => 메모리에 올려서 사용할수 있도록 준비
+
+		// TV 객체 -> 속성 : 크기(가로,세로),색상,전원,채널
+		//        -> 기능 : On/Off, chUp/chDown
+
+		var TV = new Object();
+
+		TV.width = "30cm";
+		TV.height = "25cm";
+		TV.color = "Black";
+		TV.power = false; // false-off, true-on
+		TV.ch = 1; // 1~500;
+
+		document.write("티비의 컬러: " + TV.color);
+
+		// 전원 on/off 기능
+		function tvOn() {
+			document.write("<br>티비 켜짐<br>");
+		}
+		function tvOff() {
+			document.write("티비 꺼짐");
+		}
+
+		function tvOnOff(TV) {
+			//alert(!TV.power);
+			TV.power = !TV.power;
+			if (TV.power) {
+				document.write("<h3>티비 켜짐</h3>");
+			} else {
+				document.write("<h3>티비 꺼짐</h3>");
+			}
+		}
+
+		//tvOnOff(TV);
+		//tvOnOff(TV);
+
+		// 채널 up/down 기능 (1~500)
+		// -> 티비가 켜져있을때만 실행가능
+		// 채널이동 3회 
+		function chUp() {
+			if (TV.power) {
+				alert("티비가 켜져있습니다. chUP()");
+				TV.ch++;
+				document.write(" 채널 : " + TV.ch);
+			} else {
+				// off
+				alert("티비가 꺼져있습니다.");
+			}
+		}
+		function chDown() {
+			if (TV.power) {
+				alert("티비가 켜져있습니다. chDown()");
+				TV.ch = 500;
+				document.write(" 채널 : " + TV.ch);
+			} else {
+				// off
+				alert("티비가 꺼져있습니다.");
+			}
+		}
+		tvOnOff(TV);
+		//chUp();
+		chDown();
+
+		//tvOn();
+		//tvOff();
+		//var TV2 = new Object();
+		//document.write("티비의 컬러: "+TV2.color);
+
+		// 스마트폰 -> 전원, 전화(통화) 기능
+
+		// 스마트폰 객체 생성
+		var Note9 = new Object();
+		// 객체 속성
+		Note9.power = false;
+		Note9.model = "삼성 노트9";
+		Note9.telNum = "010-1234-4567";
+
+		// 객체 기능
+		function PowerOnOff() {
+			Note9.power = !Note9.power;
+			if (Note9.power) {
+				alert("스마트폰 켜짐");
+			} else {
+				alert("스마트폰 꺼짐");
+			}
+		}
+
+		PowerOnOff();
+
+		function tel() {
+			if (Note9.power) {
+				alert(Note9.telNum+"전화 거는중..");
+			} else {
+				alert("스마트폰 꺼짐");
+			}
+		}
+		tel();
+		
+		// 날짜정보를 처리하는 객체 Date
+		var today = new Date();
+		// => 시스템의 시간정보를 가져와서 객체로 생성
+		document.write(today);
+		// 1월~12월  => 0 ~ 11
+		var day = new Date(2020,0,1);//년,월,일 지정해서 객체를 사용
+		document.write("<br>"+day+"<br>");
+		
+		// 년,월,일,시,분,초 지정해서 객체를 사용
+		var day2 = new Date(2020,0,1,11,0,4);
+		document.write("<br>"+day2+"<br>");
+		
+		var day3 = new Date("2020/1/1");//"년/월/일" 지정해서 객체를 사용
+		document.write("<br>"+day3+"<br>");
+		
+		document.write("<hr>");
+		
+		document.write( today.getFullYear() +"년");
+		//월 (0~11 표시 되기 때문에 1을더해서 생각)
+		document.write( (today.getMonth()+1) +"월" );
+		//일
+		document.write( today.getDate() +"일");
+		
+		// getDay() => 요일 정보를 가져오는 함수
+		// 0(일) ~ 6(토)
+		//=> 함수를 생성해서 해당 요일을 출력하도록 하시오.
+		// getToDay()
+		function getToDay(day){
+			switch( day ){
+			case 0:
+				document.write("일요일");
+				break;
+			case 1:
+				document.write("월요일");
+				break;
+			case 2:
+				document.write("화요일");
+				break;
+			case 3:
+				document.write("수요일");
+				break;
+			case 4:
+				document.write("목요일");
+				break;
+			case 5:
+				document.write("금요일");
+				break;
+			case 6:
+				document.write("토요일");
+				break;
+			}
+		}
+		
+		getToDay(today.getDay());
+		
+		document.write("<br> "+today.getHours());
+		document.write(":"+today.getMinutes());
+		document.write(":"+today.getSeconds())
+		
+		
+		document.write("<hr>");
+		
+		// 2002 월드컵 -> 개막일 5/31일 => 무슨요일?
+		var FIFA2002 = new Date(2002,4,31);
+		
+		getToDay(FIFA2002.getDay());
+		
+		// 특정일 - 현재날짜 => 남은 일수(밀리초 1/1000초)
+		// 1s(초) = 1000msc(밀리초)
+		// 1m(분) = 1000 * 60 msc
+		// 1h(시간) = 1000 * 60 * 60 msc
+		// 1D(일) = 1000 * 60 * 60 * 24 msc
+		
+		// 오늘 부터 연말까지 남은 일수 계산(2020.12.31)
+		
+		// 마지막날(연말)
+		var lastDay = new Date(2020,11,31);
+		
+		var value = lastDay - today;
+		
+		//alert(value);
+		var Dday = Math.ceil(value / (1000 * 60 * 60 * 24));
+		alert("D-day : "+ Dday+" 일 ");
+		
+		
+		
+	</script>
+
+
+
+
+
+
+</body>
+</html>

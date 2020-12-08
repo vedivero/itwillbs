@@ -1,0 +1,13 @@
+  회원 정보를 DB에서 읽어서 출력하는 동작을 구현
+ 
+ Action 인터페이스 - execute()
+ SelectMemberAction 객체 사용 
+  - DAO 객체 생성 -> 처리 (출력)
+ 
+ MemberControllerTest 객체 생성 -> 호출
+  
+  
+  * 의존관계 - Select <-> DAO  : DAO 객체를 주입 
+  * 객체를 미리 생성(Spring) member.xml 생성
+  
+  

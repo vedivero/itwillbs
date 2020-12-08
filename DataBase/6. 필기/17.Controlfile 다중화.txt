@@ -1,0 +1,20 @@
+<Controlfile 다중화 작업 순서>
+1.DB 추가
+SQL> alter system set control_files = 
+'/u01/app/oracle/oradata/ORCL/controlfile/o1_mf_fwvn95xm_.ctl',
+'/u01/app/oracle/fast_recovery_area/orcl/ORCL/controlfile/o1_mf_fwvn96cd_.ctl',
+'/home/oracle/control03.ctl'  scope = spfile;
+
+2.DB 종료
+SQL> shut immediate
+
+3.OS 추가
+$] cd /u01/app/oracle/oradata/ORCL/controlfile
+$] ls
+$] cp  o1_mf_fwvn95xm_.ctl  /home/oracle/control03.ctl 
+
+4.DB 시작
+SQL> startup  => error!(mount X) => SQL> show parameter control_files
+
+5.확인(DB가 open되어야 확인 가능함!)
+SQL> select name from v$controlfile;  => 3개 확인!!!

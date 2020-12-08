@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>WebContent/JS4/Test2.html</h1>
+	<!-- html 코드 정렬시 tab(오른쪽) / shift+tab(왼쪽) -->
+	<h2>회원정보 입력페이지</h2>
+
+	<fieldset>
+		<legend> 아이티윌 회원 가입 </legend>
+		<form action="itwill.jsp" method="get" name="fr" onsubmit="return check2();">
+			아이디 : <input type="text" name="id" value=""> <br>
+			<!-- password 타입 : 사용자가 정보 입력시 비밀번호 확인 불가능 -->
+			비밀번호 : <input type="password" name="pw"> <br>
+			 주민번호 : <input	type="text" name="ju1" onkeyup="fun4();"> 
+			 - <input type="password" name="ju2" onkeyup="fun5();"><br>
+			메모 : <input type="text" name="memo" id="memoID"><br>
+			 <input	type="submit" value="회원 정보 저장(submit)" onclick="">
+			<!-- 일반 버튼 생성 : 클릭시 입력받은 정보의 값을 모두 출력 -->
+			<input type="button" value="입력값 확인" onclick="fun1();">
+			<!--  버튼 클릭시 체크 : 아이디가 admin일때 메모에 "관리자 입니다" 값으로 메모값 변경 
+			      admin이 아닐때, 사용자 아이디+"환영합니다" 값으로 메모값 변경
+			-->
+			<input type="button" value="입력값 변경" onclick="fun2();"> <input
+				type="button" value="동작실행" onclick="fun3();">
+			<hr>
+			<!-- 버튼 클릭시 아이디 정보가 있으면
+			     해당 아이디정보 출력(alert)
+			     아이디정보가 없으면 
+			     "아이디가 없습니다." (alert)
+			     + focus() 
+			 -->
+			<input type="button" value="텍스트 상자 제어하기" onclick="check1();">
+		</form>
+	</fieldset>
+    <!-- 
+       submit버튼 클릭 동작
+            아이디,비밀번호,주민번호,메모 정보중 입력값이 없으면 
+            데이터 전송 불가( 모든 데이터가 있을때만 전송 )     
+     -->
+
+
+
+
+
+	<script type="text/javascript">
+		function fun1() {
+			// 입력값 확인 
+			// (window.)document.폼태그이름.요소명.속성
+			console.log(document.fr.id.value);
+			console.log("@@ : " + document.fr.id.value);
+			console.log("@@ : " + document.fr.id.type);
+			console.log("@@ : " + document.fr.id.name);
+
+			alert("주민번호 : " + document.fr.ju1.value);
+			alert("주민번호 : " + document.fr.ju2.value);
+
+		}
+
+		function fun2() {
+			alert("fun2() 실행");
+			var id = document.fr.id.value;
+			//alert("ID : "+document.fr.id.value);
+			alert("ID : " + id);
+
+			if (id == "admin") {
+				alert("관리자");
+				document.fr.memo.value = "관리자 입니다";
+				alert("변경완료");
+			} else {
+				alert("관라자 아님");
+				document.fr.memo.value = id + " 환영합니다.";
+				alert("변경완료");
+			}
+		}
+
+		function fun3() {
+
+			document.fr.pw.value = "1234";
+
+			// focus()-> 사용자 입력 실패시 해당 요소를 선택해서 보여줌
+			//document.fr.pw.focus();
+
+			// blur() -> 포커스 해제
+			// document.fr.pw.blur();
+
+			// select() -> 해당 요소의 값을 선택한 상태 
+			document.fr.pw.select();
+		}
+
+		function check1() {
+			var id = document.fr.id.value;
+			// 		  if(id.length>1){
+			// 			  alert("id : "+id);
+			// 		  }else{
+			// 			  alert("아이디가 없습니다.");
+			// 			  document.fr.id.focus();
+			// 			  return; //문제가 있을경우 다른 조건을 실행하지 않고 지금 문제를 먼저 해결
+			// 		  }		  
+
+			if (id == "") { // "" : 공백문자
+				alert("아이디가 없습니다.");
+				document.fr.id.focus();
+				return;
+			}
+			// 아이디의 값이 4자리~ 8자리 사이의 값인지 판단
+			// => 4~8자리의 값이 아닐경우 해당 요소를 포커스 해서 
+			//   사용자로부터 다시 입력할수 있도록 함.
+			
+			if( !(4<=id.length && id.length <=8) ){
+			    alert(" 잘못된 아이디 정보 입니다. ");
+			    document.fr.id.focus();
+			    return;
+			}
+			
+			// 비밀번호, 주민번호,메모 입력 안된 부분이 있을경우
+			// alert( )출력후, 해당요소 focus();
+			// => 모든 항목이 입력 완료후 페이지 이동(정보 전달)
+			
+			if( document.fr.pw.value == "" ){
+				alert("비밀번호를 입력하시오");
+				document.fr.pw.focus();	
+				return;
+			}
+			
+			if( document.fr.ju1.value.length <= 0 ){
+				alert("주민번호 앞자리를 입력하시오.");
+				document.fr.ju1.focus();
+				return;
+			}
+			if( document.fr.ju2.value.length <= 0 ){
+				alert("주민번호 뒷자리를 입력하시오.");
+				document.fr.ju2.focus();
+				return;
+			}
+			
+			if(document.getElementById("memoID").value == ""){
+				alert("메모를 입력해주시오");
+				document.getElementById("memoID").focus();
+				return;
+			}
+			
+			
+			document.fr.submit();
+
+		}//check1()
+		
+		function check2(){
+			//alert("실행");
+		    var id = document.fr.id.value;
+			if (id == "") { // "" : 공백문자
+				alert("아이디가 없습니다.");
+				document.fr.id.focus();
+				return false;
+			}
+			if( !(4<=id.length && id.length <=8) ){
+			    alert(" 잘못된 아이디 정보 입니다. ");
+			    document.fr.id.focus();
+			    return false;
+			}
+			if( document.fr.pw.value == "" ){
+				alert("비밀번호를 입력하시오");
+				document.fr.pw.focus();	
+				return false;
+			}
+			
+			if( document.fr.ju1.value.length <= 0 ){
+				alert("주민번호 앞자리를 입력하시오.");
+				document.fr.ju1.focus();
+				return false;
+			}
+			if( document.fr.ju2.value.length <= 0 ){
+				alert("주민번호 뒷자리를 입력하시오.");
+				document.fr.ju2.focus();
+				return false;
+			}
+			
+			if(document.getElementById("memoID").value == ""){
+				alert("메모를 입력해주시오");
+				document.getElementById("memoID").focus();
+				return false;
+			}
+			
+		}
+		
+		/*
+		  주민번호 입력 (키보드 이벤트 onkey~~)
+		  앞자리 6자리 입력시 -> 뒷자리 입력 (포커스 이동)
+		  뒷자리 7자리 입력시 -> 메모칸으로 이동 (포커스 이동)		
+		*/
+		function fun4() { // 앞자리
+			  if(document.fr.ju1.value.length == 6){
+				  document.fr.ju2.focus();
+			  }
+		}
+		function fun5() { // 뒷자리
+			if(document.fr.ju2.value.length == 7){
+			   document.fr.memo.focus();	
+			}			
+		}
+		
+		
+		
+		
+		
+	</script>
+</body>
+</html>

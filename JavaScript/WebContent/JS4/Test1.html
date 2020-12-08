@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>WebContent/JS4/Test1.html</h1>
+	<h1>form 태그</h1>
+	
+	<!-- 
+	  폼 태그는 폼태그 안에 있는 정보를 저장해서 
+	  원하는 페이지로 전달하는 방법
+	  
+	  action페이지로 정보를 전달, 주소줄에 ?를 사용해서 붙여서 이동(get방식)
+	  
+	  method = "get" 속성은 생략 가능(기본속성)
+	  action = "정보를 가지고 이동할 페이지", 이동할 정보가 없을경우 
+	                      자신의 페이지 호출	  
+	 -->
+	
+	<!-- onsubmit : 이벤트 : 서브밋 동작이 작동할때 처리 -->
+	<form action="itwill.jsp" method="get" name="myForm" onsubmit="fun2();">
+	  텍스트 박스 : <input type="text" name="txt"><br>
+	  전화번호 : <input type="text" name="tel" value="010-1234-1111"><br>
+	  
+	<!--  <label>텍스트 박스 :</label> <input type="text" name="txt"> -->
+	 
+	 <!-- <input type="submit" value=" 전달하기 " onclick="fun2();"> -->
+	 <input type="submit" value=" 전달하기 ">
+	 <input type="reset" value=" 초기 화 ">
+	</form>
+	
+	<hr>
+	  <!-- 버튼 클릭시  "a.jsp" 페이지로 정보를 전달   -->
+	  <input type="button" value="폼태그 사용후 이동" onclick="fun1();">
+	
+	<hr>
+	
+	
+  <hr>
+  <h2> 페이지 이동 방식 </h2>
+  <h3> GET 방식 </h3>
+   get() 메서드.<br>
+     전송할 데이터를(파라미터) 이동하는 주소정보(URL)에 붙여서 같이 전송 방법<br>
+   => itwill.jsp?파라미터 이름=값 & 파라미터이름 = 값<br>
+   256byte 길이 이상의 정보를 가져갈수 없음(가져갈수있는 파라미터의 개수가 지정됨)<br>
+      빠른 전송속도, Body의 정보가 필요없음. 전달되는 정보가 모두 주소줄에 오픈.
+      => 보안에 취약한 정보를 사용할수 없음(개인정보 사용 X), 간단한 정보,사용자가 봐도 모르는 정보
+      <br>
+  <hr>
+  <h3> POST 방식 </h3>
+   post() 메서드.<br>
+   => itwill.jsp <br>
+      파라미터값을 가지고 이동하는데 주소줄이 아니라, Body에 담아서 전송.<br>
+      외부에서 정보(파라미터)를 알 수 없음-> 길이 제약X(많은양의 데이터를 전달)<br>
+     상대적으로 보안에 우수함 
+  
+  <hr>
+
+
+	<script type="text/javascript">
+	  
+		// document.forms[위치인덱스].속성
+		// document.폼태그명.속성
+
+		// form태그의 정보=> 속성, 동작
+		alert("폼 태그의 이름 : " + document.forms[0].name);
+		// 폼태그의  action 페이지 정보 출력
+		alert("action 페이지 : "+document.myForm.action);
+		// 폼태그의  method 정보 출력
+		alert("method 정보(이동방식) : "+document.forms[0].method);
+		
+		function fun1(){
+			var fr = document.myForm;
+			// 이동방식 변경 get -> post
+			fr.method = "post";
+			
+			// 이동할 페이지정보 a.jsp
+			document.myForm.action = "a.jsp";
+			// 페이지 이동 : 이후에 적용되는 속성은 없음.
+			//document.forms[0].submit();
+			fr.submit();
+		}
+		
+		// form태그 안에 있는 submit 버튼 클릭시 
+		// "b.jsp" 페이지로 이동, post방식으로 처리
+		function fun2(){
+			alert("submit 버튼 클릭");
+			
+			document.myForm.action = "b.jsp";
+			document.myForm.method = "post";
+			
+			// submit 버튼의 경우 submit() 호출은 필요없음
+			//document.myForm.submit();			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+	</script>
+
+</body>
+</html>

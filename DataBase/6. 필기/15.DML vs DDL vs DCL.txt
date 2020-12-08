@@ -1,0 +1,14 @@
+<DQL> - 데이터질의어
+-select
+
+<DML> - 데이터조작어
+-insert, update, delete
+-commit, rollback으로 트랜잭션을 마무리해야함
+
+<DDL> - 데이터정의어
+-create, alter, drop, truncate
+-autocommit됨
+
+<DCL> - 데이터제어어
+-grant, revoke
+-autocommit됨

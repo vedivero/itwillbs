@@ -1,0 +1,237 @@
+
+* Spring MVC : model2 구조를 사용한 프로젝트 생성
+
+ - Spring Legacy Project
+   -> WAS-tomcat 경험여부
+      Model2 경험여부 
+   -> 상대적으로 설정하는게 어렵다. (프로젝트 시작 1번)
+   -> 실무에서 많이 보이는 형태 ( 자료가 많음 - 구글링 )
+   -> 기존의 프로젝트를 이해하기 쉽다.
+   -> 모든 버전의 스프링을 사용가능
+   -> * 리소스가 많이 필요함   
+ 
+ - Spring Starter Project (Spring Boot)
+   -> 최대한 간결하게 실행, 배포 하기위한 방법
+   -> WAS 없이 실행가능
+   -> 최신 유행하는 동작 -> 빠르게 처리가능 (간단한 테스트용)
+   -> * jsp뷰 별도의 설정필요 
+   
+  * Maven(메이븐) - 빌드도구
+    -> 필요한 라이브러리들을 pom.xml 파일을 사용해서 관리
+    
+    https://mvnrepository.com/
+    - 프로젝트 우클릭 > Maven > project update ( 해당 파일 동기화 )
+    - C:\Users\ITWILL\.m2\repository 폴더에 저장
+      (강제로 삭제후 STS 재실행) 
+      
+   
+   
+   servlet-context.xml
+    => 스프링 프로젝트에서 웹과 관련된 모든 속성을 처리 
+   root-context.xml
+    => 스프링 프로젝트에서 웹을 제외한 모든 속성을 처리 
+    
+    
+    
+    디비 생성
+    CREATE SCHEMA `springdb` DEFAULT CHARACTER SET utf8 ;
+    
+    
+    * 스프링 웹 프로젝트
+    
+    Presentation Layer : UI담당하는 계층, 웹,모바일 구분
+    => view-jsp 페이지,html,css,js 
+     + Controller - 컨트롤러 
+    
+    Business Layer : 서비스 계층, 사용자 요구사항을 바탕으로
+    구현하는 계층(기능적 구현)
+    => 추가된 개념( 컨트롤러 - DB 직접 연결을 방지 사용 ) 
+    
+    Data Access Layer : 데이터처리 계층, DB관련 처리 
+    (=Persistence Layer)
+    => DAO 객체 처리 + My(i)Batis 호출
+    
+    Data Base
+    
+    
+   * MyBatis
+    : 스프링 프레임워크와 같이 활용하여 효율적인 SQL 처리 
+    -> 'SQL Mapper 라이브러리'
+    - 반복되는 try~catch 구문, pstmt,rs 객체를 대신 처리 
+      => 코드의 양 줄어든다.
+    - XML/애노테이션 형태로 SQL 구문을 사용       
+    - 스프링과 자동으로 연동되어 처리되는 라이브러리를 제공
+    - 동적 SQL문 사용 가능
+    
+   <라이브러리 추가>
+   MyBatis
+   
+   MyBatis-Spring : spring-MyBatis사이의 연결
+   
+   Spring-JDBC : spring에서 JDBC 사용
+   
+   Spring-test : spring-MyBatis연결을 체크 (Junit 역활) 
+   
+    
+   
+   * SqlSessionFactory 객체 : Connection을 생성,사용 객체 + MyBatis 설정
+     -> SqlSessionFactoryBean 클래스를 사용
+     
+     
+    *스프링 MVC - model2방식 개발(거의 모든 웹개발) => 패턴
+    
+     M odel : 데이터 처리(DB)
+     V iew : 화면 처리(jsp) 
+     C ontroller : 뷰와 모델을 연결
+     
+     *.me 주소를 직접 처리해서 사용하는 개방 방법
+     => 1) 개발자,디자이너의 영역을 분리 
+        2) 각각의 주소(URI)통한 페이지 제어하기 때문에 유지보수 쉽다.
+     
+     - Front Controller패턴 : 조금더 강제적으로 페이지 제어 
+       : 컨트롤러 하나가 전체 로직을 제어->  일부분만 제어하는 컨트롤러 생성
+         '위임'
+     
+     
+     주소요청 -> FC  <->  C  <-> M
+        
+        		|
+        
+       			V
+       			
+    <스프링 MVC>  			
+    ----------------------------------------------------------------   			
+    주소요청 -> FC  <->  C  <-> Service <-> DAO <->MyBatis <-> MySQL
+        
+        		|
+        
+       			V
+    ----------------------------------------------------------------   			
+   * 스프링MVC가 처리해주는 작업     			
+     - URI를 분석해서 알맞는 컨트롤러 찾기
+     - 컨트롤러에 필요한 메서드 호출   
+     - 컨트롤러의 결과 데이터를 뷰로 전달
+     - 적절한 뷰 페이지를 찾아서 연결
+   
+   * 개발자가 처리해야하는 작업
+     - 특정 URI에 동작하는 컨트롤러를 설계
+     - 서비스 객체 생성 (약한결합)
+     - DAO 객체 생성 (약한결합)
+     - 컨트롤러 내부에 원하는 동작을 메서드로 설계 
+     - 뷰에서 전달받은 데이터 출력 
+     
+     
+    * 스프링 MVC 에서의 컨트롤러
+     - 페이지 요청에 따른 처리 -> 파라미터 처리 (DTO객체,VO객체) 
+     - 애노테이션을 사용한 처리 
+     - 로직이 집중
+     - 테스트 동작의 편의성
+      
+        
+     
+     * 자주 활용될 애노테이션
+     @Controller : 스프링 MVC 컨트롤러 객체의미 (클래스) 
+     @RequestMapping : 특정URI에 매칭되는 클래스,메서드처리 (클래스,메서드) 
+     @RequestParam : 요청정보 중에서 파라미터값을 찾을때사용(파라미터)
+     @ModelAttribute : 자동으로 해당 객체를 뷰까지 전달 (메서드,파라미터)
+     @SessionAttribute : 세션객체 안에서 정보를 유지 (클래스)
+     @Repository : DAO 객체 (클래스) 
+     @Service :  서비스 객체 (클래스)
+     
+     
+     
+     * 개발하는 순서
+     
+     DB -> MyBatis -> DAO -> Service -> Controller -> View
+    
+    
+    * MyBatis(iBatis)
+    
+    1) XML 코드를 사용해서 SQL구문, DAO파일에서 XML코드를 호출해서 사용
+    장점: SQL구문이 xml 파일로 분리, 쿼리 수정 유지보수에 유리
+    단점: 개발할 코드의 분량이 많아짐, 복잡도 증가
+    
+    2) 애노테이션과 인터페이스를 사용해서 SQL구문 처리
+    장점: 별도의 DAO없이 개발 가능 (생산성 증가)
+    단점: 쿼리 수정이 필요한경우, 매번 컴파일 해야함.
+    
+    3) 인터페이스(애노테이션)와 XML을 같이 사용해서 SQL구문 처리 
+    장점: 간단한 SQL 인터페이스로, 복잡한 SQL은 XML 파일을 사용하여 유연한 대처
+    단점: 개발자 마다 개발 방식의 차이가 발생 가능성 증가
+     
+     
+   * MyBatis 사용방식
+   (- 필요 라이브러리 준비)
+   - DB생성, 테이블 생성 (개발준비)
+   - 도메인 객체 설계(DTO,VO), 클래스 생성
+   - DAO 인터페이스 생성
+   - 인터페이스에 사용할 기능 작성(명세)
+   - XML Mapper 생성, SQL 구문 작성
+     - XML파일로 만들어진 Mapper의 위치설정
+     - XML파일안에 Mapper - DTD 지정
+     - SQL 구문 작성후 사용
+   - MyBatis 에서 XML Mapper를 인식 하도록 설정(root-context.xml)
+   - DAO 객체 구현 (인터페이스 구현)
+   - 스프링을 활용한 DAO 테스트(Junit)
+   
+   
+   
+   CREATE TABLE `springdb`.`tbl_member` (
+  `userid` VARCHAR(50) NOT NULL,
+  `userpw` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `useremail` VARCHAR(100) NULL,
+  `regdate` TIMESTAMP NULL DEFAULT now(),
+  `updatedate` TIMESTAMP NULL DEFAULT now(),
+  PRIMARY KEY (`userid`));
+   
+ 
+   * SqlSessionTemplate 객체 
+   : 데이터베이스 연결, 사용후에는 자원해제 (close())처리해주는 객체
+    - mybatis-spring 라이브러리에 포함되어있음.
+    
+    => SqlSession 인터페이스를 구현한 객체   
+     : 기본적인 트랜젝션, 쓰레드 처리의 안정성 보장,디비 연결/해제 
+   
+  
+  
+  * 서비스 계층(비지니스 계층)
+   -> 사용자의 요구사항을 일치 시켜서 구현하는 계층
+   -> DAO - Controller 연결   
+   
+   - 고객마다 다르게 처리해야하는 부분을 처리 
+   - DB와 무관하게 처리할수 있는 영역
+   - * 컨트롤러(외부호출)의 영속계층(persistence) 종속을 막아줌
+   => 컨트롤러가 트렌젝션,예외처리등을 모두 처리해야하지만,
+      종속적인 상황을 벗어나면 컨트롤러는 컨트롤러의 역활 처리 
+     
+     
+  * 컨트롤러 (프레젠테이션 계층)
+  -> 컨트롤러 + 뷰
+  
+  - 공통적인 URI경로, 각 기능별 URI 지정
+  - 각 URI에대한 호출방식(GET/POST)
+  - 결과 처리, 페이지 이동
+  - 예외처리 
+  
+  - 컨트롤러는 모듈(특정메뉴,기능묶음을 단위로 생성)
+  -> /모듈/~  /모듈s/~ 주소작성하도록 설계
+  
+  - URI를 어떤 방식으로 처리할것인지에 대한 설계가 필요함
+   - 외부에서 접근해오는 페이지 (입력) - GET
+   - 정보를 조회하는 페이지 - GET
+   - 데이터를 처리해야하는 페이지 - POST
+   
+  
+  
+  
+     
+     
+     
+     
+    
+   
+   
+   
+   
+

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>WebContent/JS1/Test4.html</h1>
+
+	<script type="text/javascript">
+		// 무한반복문 : 반복문이 무한으로 실행되는 반복문
+		//     for(;;){
+		//     	//무한반복문
+		//     	//document.write("Hello<br>");
+		//     	//console.log("Hello");
+		//     }
+		// 	    for(;true;){ }
+		//      while(true) {  }
+		//     do{  } while(true);
+		// => 문제의 해결이 언제 끝날지 모르는 경우 
+
+		// 퀴즈 프로그램-> 사용자가 정답시 까지 실행
+
+		// => 보조 제어문
+		// 1) break문 : 가장 가까운 반복문 하나를 탈출
+		// 2) continue문 : 해당경우를 실행하지 않고 다음 경우를 실행하는 동작
+
+		// 		for (var i = 1; i <= 10; i++) {
+		// 			document.write(i + " ");
+		// 			if (i % 3 == 0)
+		// 				break;			
+		// 		}
+
+		// 		for (var i = 1; i <= 10; i++) {
+		// 			if (i % 3 == 0)
+		// 				continue;
+		// 			document.write(i + " ");
+		// 		}
+
+		// 		for(var i=1;true;i++){
+		// 			if(i==100) break;
+		// 			document.write(i+" ");
+		// 		}
+		
+		// 숫자 퀴즈
+		// 특정 숫자 지정(1~100)  ex) 56
+		var Quiz = Math.floor(Math.random()*100);
+		//var Quiz = 50;
+		// alert(Quiz);
+		document.write(" Quiz : "+Quiz+"<br>");
+		// 사용자로부터 입력(prompt) -> 문제보다 큰지,작은지, 같은지를 비교 
+		
+		for(var cnt=1 ;; cnt++){
+			var value = prompt("정답을 입력하시오(1~100)","0");
+			
+			if(value > Quiz){
+				alert("입력된 값이 더 큽니다.");
+			}else if(value < Quiz){
+				alert("입력된 값이 더 작습니다.")
+			}else{
+				alert("정답 입니다("+cnt+")");
+				break;
+			}
+		}
+		// 큰경우 -> ex) 70  "입력된 값이 더 큽니다."
+		// 입력
+		// 작은 경우 -> ex) 30 "입력된 값이 더 작습니다."
+		// 같은경우 -> ex) 56   "정답입니다(00회)"
+		
+		
+		
+		
+		
+		
+		
+		
+	</script>
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>location 객체</title>
+</head>
+<body>
+	<h1>WebContent/JS3/Test3.html(강사용)</h1>
+
+	<script type="text/javascript">
+	  // location 객체
+	  // : 브라우저의 url(주소창)에 대한 정보를 가지고 있는 객체 
+	  
+	  // 페이지 이동 (href : 브라우저의 주소창의 정보url을 리턴)
+	  // location.href="Test2.html";
+	 
+	 // http://localhost:8088/JavaScript/JS3/Test3.html
+	 function fun1(){
+		 alert("href : "+window.location.href);
+		 alert("protocol : "+location.protocol);
+		 // 프로토콜 : 통신 규약(어떤방식으로, 어떤 속도로 해당 통신을 할껀지 약속)
+		 // 웹 통신을 위한 프로토콜 : [http:] [https:]
+		 alert("hostname : "+location.hostname);
+		 alert("host : "+location.host);
+		 alert("port : "+location.port);
+		 alert("search : "+location.search); 
+	 }
+	 // 페이지 새로고침
+	 // location.reload();
+	 // 페이지 변경(이동)
+	 // location.replace(url);
+	 
+	 
+	
+	</script>
+    
+    <input type="button" value="location 객체 속성" onclick="fun1()"><br>
+
+
+
+
+</body>
+</html>

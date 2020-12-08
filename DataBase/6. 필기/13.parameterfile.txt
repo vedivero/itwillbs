@@ -1,0 +1,23 @@
+<Parameterfile 유형>
+1.PFILE
+-위치 : $ORACLE_HOME/dbs
+-이름 : initSID.ora
+-특징 : text file - vi 편집기로 수동 편집 가능함
+       static file - DB 운영 중 parameter값 변경 시
+		     바로 적용 안됨
+		     DB 재시작 시 적용됨
+2.SPFILE
+-위치 : $ORACLE_HOME/dbs
+-이름 : spfileSID.ora
+-특징 : binary file - 수동 편집 X, Oracle이 유지관리함
+       dynamic file - DB 운영 중 parameter값 변경 시
+		      바로 적용됨
+-조회 : SQL> show parameter db_block_size
+       SQL> show parameter db_cache_size
+-변경 : SQL> alter system set db_cache_size = 512M 
+		  scope = memory | both | spfile;
+-scope옵션 : 1)memory - 현재 DB에만 적용 O, spfile에는 적용 X
+		       즉, DB 재시작 시 원래값으로 되돌아감
+	    2)both(default) - 현재 DB에도 적용 O, spfile에도 적용 O
+	    3)spfile - 현재 DB에는 적용 X, spfile에만 적용 O
+		       즉, DB 재시작 시 적용함(static) 

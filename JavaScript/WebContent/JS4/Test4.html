@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+  <h1>WebContent/JS4/Test4.html</h1>
+  
+  <fieldset>
+    <legend> 선택상자 </legend>
+    <form action="itwill.jsp" method="get" name="fr">
+    
+    
+    <!-- size="3" multiple="multiple" -->
+     <!-- 선택상자의 내용을 선택시 마다(내용이 변경될때마다) 
+         해당 대상의 화면에 보여지는 값을 출력 alert()
+      -->
+    
+     <select name="sel" onchange="fun2()" >
+       <option value="">선택하시오.</option>
+       <option value="JAVA">JAVA</option>
+       <option value="JSP">JSP</option>
+       <option value="JS">JavaScript</option>     
+     </select>
+     
+     <input type="submit" value="전송">  
+     <hr>
+     <input type="button" value="속성 확인" onclick="fun1()">
+     
+      
+    </form>  
+  
+  </fieldset>
+  
+  
+  
+  
+  
+  
+  <script type="text/javascript">
+     function fun1(){
+    	 // 선택상자의 이름
+    	 alert("name : "+document.fr.sel.name);
+    	 alert("length : "+document.fr.sel.length);// 목록의 개수
+    	 alert("type : "+document.fr.sel.type);
+    	 alert("index : "+document.fr.sel.selectedIndex);//선택된 목록의 위치값
+    	 alert("text : "+document.fr.sel.options[0].text); // 화면에 보이는 값
+    	 alert("value : "+document.fr.sel.options[0].value); // 실제 데이터값
+    	 alert("selected : "+document.fr.sel.options[0].selected);
+     }
+     
+     
+     function fun2(){
+    	 alert("text : "+document.fr.sel.options[document.fr.sel.selectedIndex].text); 
+     }
+  
+  
+  </script>
+  
+  
+  
+  
+
+</body>
+</html>

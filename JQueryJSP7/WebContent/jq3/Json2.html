@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 컴퓨터에 있는 제이쿼리 라이브러리 추가  -->
+<script src="../js/jquery-3.5.1.min.js"></script>
+
+<script type="text/javascript">
+   
+   $(document).ready(function(){
+	   
+	   $.getJSON("Json2.json",function(data){
+		  // data - 배열을 저장해서 가지고옴
+		  // 내용물을 꺼내서 본문에 추가 
+		  
+		  // [ {속성,속성},{속성,속성} ]
+		  // 1) 각각의 객체 먼저 접근
+		  // 2) 각각의 객체 속성에 접근
+		  $.each(data,function(index,item){
+			  //alert("index : "+index+",item : "+item);
+			  
+			 // $('body').append(item.name+" / "+item.age+" / "+item.addr+"<br>");
+			 $('table').append("<tr><td>"+item.name+"</td><td>"+item.age+"</td><td>"+item.addr+"</td></tr>"); 
+		  });
+		   
+	   });	   
+	   
+   });
+
+
+	
+</script>
+
+
+
+</head>
+<body>
+	<h1>WebContent/jq3/JSon2.html</h1>
+	
+	<hr>
+	<table border="1">
+	 <tr>
+	   <th>이름</th>
+	   <th>나이</th>
+	   <th>주소</th>
+	 </tr>
+	</table>
+	
+	
+
+
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<제약조건을 선언하는 시기>
+-table 생성 시 : create table ---;
+-table 생성 후 : alter table ---;
+
+<제약조건 선언 시 제약조건명>
+-사용자 지정 : 의미있고 고유한 제약조건명 지정
+	    ex) 테이블명약자_컬럼명약자_제약조건유형약자
+		emp_empid_pk
+		dept_dname_nn
+		emp_mgrid_fk
+		emp_sal_ck
+		emp_email_uk
+		
+-사용자 생략 : Oracle이 자동으로 고유한 제약조건명 지정
+            (sys_cxxxxxx)
+------------------------------------------------------------
+salary number(10),
+constraint emp_sal_ck check (salary > 0),
+...
+(==)
+salary number(10) constraint emp_sal_ck check (salary > 0),
+.....
+------------------------------------------------------------
+주민번호 varchar2(13) constraint XXXX check (length(주민번호)=13),
+.....
+------------------------------------------------------------
+성별 varchar2(10) constraint XXXX check (성별 IN ('남','여')), 
+.....

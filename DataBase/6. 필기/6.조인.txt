@@ -1,0 +1,71 @@
+	Natural		Using		On
+	join		join		join
+---------------------------------------------------
+컬럼명	  =		=		상관없음
+데이터타입	  =		상관없음		상관없음
+문법	from dept natural join loc
+	(=)
+	from dept join loc using(location_id)
+	(=)
+	from dept join loc
+        on (dept.location_id = loc.location_id)
+
+
+
+equi join		non-equi join
+--------------------------------------------------
+-조인조건에 동등연산자가	-조인조건에 동등연산자가 아닌
+ 사용된 조인 유형		 그 외 다른 비교연산자가 사용된
+-Natural join		 조인 유형
+ Using join		-On(=이 아닌 비교연산자) join
+ On(=) join
+
+inner join		outer join
+--------------------------------------------------
+-내부조인			-외부조인
+-조인조건을 만족하는 행만	-조인조건을 만족하는 행과
+ 반환하는 조인 유형		 조인조건을 만족하지 않는 행을
+-Natural join		 모두 반환하는 조인 유형
+ Using join		-left outer join
+ On join		 right outer join
+			 full outer join
+----------------------------------------------------------
+<연습문제>
+1. select e.employee_id, e.last_name, e.salary,
+          e.department_id, d.department_name
+   from employees e join departments d
+   on (e.department_id = d.department_id);
+   (==)
+   select e.employee_id, e.last_name, e.salary,
+          department_id, d.department_name
+   from employees e join departments d
+   using (department_id);
+   
+2. select e1.last_name as "Employee", e1.employee_id as "Emp#",
+          e2.last_name as "Manager", e1.manager_id as "Mgr#"
+   from employees e1 join employees e2
+   on (e1.manager_id = e2.employee_id);
+   (==)
+   select e1.last_name as "Employee", e1.employee_id as "Emp#",
+          e2.last_name as "Manager", e2.employees_id as "Mgr#"
+   from employees e1 join employees e2
+   on (e1.manager_id = e2.employee_id);
+
+   (오답)
+   select e1.last_name as "Employee", e1.employee_id as "Emp#",
+          e2.last_name as "Manager", e2.manager_id as "Mgr#"
+   from employees e1 join employees e2
+   on (e1.manager_id = e2.employee_id);
+
+
+
+
+
+
+
+
+
+
+
+
+

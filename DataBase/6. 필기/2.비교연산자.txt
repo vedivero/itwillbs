@@ -1,0 +1,40 @@
+<Like 비교연산자>
+% : 0 or 여러개
+_ : 반드시 1 char
+
+a로 시작되는 문자열 : 'a%'
+a가 포함된 문자열 : '%a%'
+a로 끝나는 문자열 : '%a'
+두번째 문자가 a인 문자열 : '_a%'
+끝에서 세번째 문자가 a인 문자열 : '%a__'
+-------------------------------------------------------
+(예제1) employees 테이블로부터 사원들의 employee_id, last_name,
+salary, commission_pct를 출력하되 커미션을 받지 않는 사원만
+출력하는 구문을 작성하시오.
+SQL> select employee_id, last_name, salary, commission_pct
+     from employees
+     where commission_pct is null;
+-------------------------------------------------------
+<비교연산자>
+=			<-->	<>, !=
+>, >=			<-->	<, <=
+between A and B		<-->	not between A and B
+in => (=,OR)		<-->	not in => (<>,AND)
+like			<-->	not like
+is null			<-->	is not null
+--------------------------------------------------------
+(2장 연습문제)
+1.
+SQL1> select last_name, hire_date
+      from employees
+      where hire_date like '%04';
+
+SQL2> select last_name, hire_date
+      from employees
+      where hire_date between '01-JAN-04' and '31-DEC-04';
+
+2.
+SQL> select last_name, salary, commission_pct
+     from employees
+     where commission_pct is null
+     order by salary desc;

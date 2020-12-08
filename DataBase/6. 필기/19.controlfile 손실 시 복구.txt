@@ -1,0 +1,15 @@
+<Controlfile 손실 시 복구>
+(상황) Controlfile이 다중화되어 있는데 특정 멤버가 손실된 경우
+1.DB를 켜는중 오류를 발견함
+SQL> startup  => nomount O, mount X(오류!)
+              => SQL> show parameter control_files
+2.DB 종료
+SQL> shut immediate
+
+=> 손실된 Controlfile 파악!
+
+3.남아있는 멤버를 사용해서 손실된 멤버 복구
+$] cp  /u01/.../control01.ctl   /u01/.../control02.ctl
+
+4.DB 시작
+SQL> startup

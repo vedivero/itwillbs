@@ -1,0 +1,20 @@
+a. 테이블 이름 : TITLE
+
+Create table title
+(title_id NUMBER(10) CONSTRAINT title_id_pk PRIMARY KEY,
+title VARCHAR2(60) CONSTRAINT title_nn NOT NULL,
+description VARCHAR2(400) CONSTRAINT desc_nn NOT NULL,
+rating VARCHAR2(4) CONSTRAINT rating_ck CHECK (rating IN ('G','PG','R','NC17','NR')),
+category VARCHAR2(20) CONSTRAINT category_nn NOT NULL
+                      CONSTRAINT category_uk UNIQUE, 
+release_date DATE);
+
+-----------------------------------------------------------------------------------------------
+b. 테이블 이름 : TITLE_COPY
+
+Create table title_copy
+(copy_id NUMBER(10),
+title_id NUMBER(10) CONSTRAINT title_id_fk REFERENCES title(title_id),
+status VARCHAR2(15) CONSTRAINT status_nn NOT NULL
+   CONSTRAINT status_ck CHECK (status IN ('AVAILABLE','DESTROYED','RENTED','RESERVED')),
+CONSTRAINT copy_title_id_pk PRIMARY KEY (copy_id, title_id));

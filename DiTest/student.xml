@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD : 해당문서의 저장되는 데이터 지정 -->
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+   <!-- 객체 생성  -->
+   <bean id="itwill" class="com.itwill.spring.ITwillStudent">
+     <property name="name" value="홍길동"></property>
+     <property name="classNum">
+       <value>7</value>
+     </property>   
+   </bean>
+   
+   <!-- 객체 생성_생성자 사용초기화 -->
+   <bean id="conBean1" class="com.itwill.spring.ITwillStudent">
+      <constructor-arg>
+        <value>사용자(생성자)</value>
+      </constructor-arg>
+   </bean>
+   
+   <bean id="conBean2" class="com.itwill.spring.ITwillStudent">
+     <constructor-arg value="사용자2(생성자)" />
+     <constructor-arg value="1"/>
+   </bean>
+   
+
+
+
+</beans>
+
+
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>WebContent/JS2/Test4.html</h1>
+
+	<script type="text/javascript">
+		// 배열 객체 Array
+		// 연속된 공간에 여러개의 데이터를 저장하는 객체
+		// 배열의 들어있는데이터를 요소라고 한다.
+		// 배열의 인덱스는 0번부터 시작(배열의 마지막 인덱스는 배열의 크기-1)
+		// 배열의 요소는 변수처럼 사용가능 "arr[0]"
+		// => 반복문을 활용해서 사용함
+		
+		//1)
+		var arr = new Array(5);
+		arr[0] = 100; // 배열의 0번 인덱스(위치)값 초기화
+		//2)
+		var arr2 = new Array(1,2,3,4,5,6);
+		// 3)
+		var arr3 = [1,2,3,4,5,6,7];
+		// 4)
+		var arr4 = new Array();
+		
+		
+		var arr5 = [1,2,"Hello",true,2,"JS"];
+		//-> 반복문 for 사용해서 출력
+		
+		// arr5.length : 배열의 길이(요소의 개수)( 배열 객체의 속성 )
+		for(var i=0;i<arr5.length;i++){
+			document.write(arr5[i]+"<br>");			
+		}
+		
+		document.write("<hr>");
+		
+		// for ~ in 구문 : 변수의 값을 0부터 배열 객체의 개수만큼 반복
+		for(var a in arr5){
+			document.write(arr5[a]+"<br>");
+		}
+		
+		// 배열의 기능(함수들): 필요할때 찾아서 사용
+		
+		// 배열 2개 생성
+		// 3,2,4,5,1,2,6,8 
+		var nArr = [3,2,44,15,12,23,64,8]; 
+		// "apple","banana","lemon","orange"
+		var fArr = ["apple","banana","lemon","orange"];
+		document.write("<hr>");
+		//=> 각 배열의 모든 요소를 가로로 출력 
+		for(var i=0;i<nArr.length;i++ ){
+			document.write(nArr[i]+" ");
+		}
+		document.write("<hr>");
+		document.write( nArr.join("#") );
+		// 문자데이터를 사용해서 배열을 연결해서 사용
+		document.write("<hr>");
+		document.write( nArr.reverse() );
+		// => 배열의 순서를 반대로 처리
+		document.write("<hr>");
+		document.write( nArr.sort() );
+		// => 배열의 모든 요소를 오름차순 정렬
+		document.write("<hr>");
+		//document.write( nArr.reverse() );
+		document.write( nArr.reverse().join(" ") );
+		
+		
+		
+		document.write("<hr>");
+		for(var a in fArr){
+			document.write(fArr[a]+" ");
+		}
+		
+		
+		
+		
+		
+		
+	</script>
+
+
+
+</body>
+</html>

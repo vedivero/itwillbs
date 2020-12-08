@@ -1,0 +1,25 @@
+<OS User>
+-root(pw : oracle01)
+-oracle(pw : oracle) : /home/oracle 디렉토리 권한
+		       /u01/app/oracle 디렉토리 권한
+
+<DB User>
+-sys(pw : oracle) : sysdba 권한(dba + DB생성 + DB시작/종료)
+ SQL> conn sys/oracle as sysdba
+
+-system(pw : oracle) : dba 권한
+ SQL> conn system/oracle
+
+-hr(pw : hr) : Object(table, view, index 등) 관리 권한
+ SQL> conn hr/hr
+
+<수업준비>
+1. Virtualbox 프로그램 실행
+2. ORCL12c 가상머신 "시작"
+3. OS Login - username : oracle / password : oracle
+4. 터미널 열기
+5. 리스너 활성화  $] lsnrctl start
+6. SQL Plus 프로그램 실행  $] sqlplus /nolog
+7. SYS Login  SQL> conn sys/oracle as sysdba
+8. DB 시작     SQL> startup
+9. HR Login   SQL> conn hr/hr
