@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.bestpricemarket.mapper.AdminMapper"> 
+  
+<!--등록된 회원 숫자 -->
+  <select id="allMembers" resultType="int">
+	select count(id)
+	from member	  
+  </select>
+  
+<!-- 모든 회원 리스트 -->
+  <select id="getMemberList" parameterType="hashMap" resultType="MemberVO">
+  	select *
+  	from member
+  	order by reg_date desc
+  	limit #{displayPost}, #{postNum}
+  </select>
+
+<!-- 회원정보 상세보기 -->
+  <select id="detail" parameterType="String" resultType="MemberVO">
+  	select 
+  		*
+  	from 
+  		member
+  	where id=#{id}
+  </select>
+
+<!-- 계정 제한하기 -->
+  <update id="changeRestriction">
+  	update member
+  	set block=1
+  	where id=#{id}
+  </update>
+  
+<!-- 계정 제한 해제하기 -->
+  <update id="liftingRestriction">
+  	update member
+  	set block=0
+  	where id=#{id}
+  </update>
+  
+<!--  계정제한 사유 메모 입력 -->
+  <update id="restrinctionReason">
+  	update member
+  	set block_r = #{block_r}
+  	where id = #{id}
+  </update>
+  
+<!--  등록된 모든 상품의 수 -->
+  <select id="allGoodsCount" resultType="int">
+  	select count(gno)
+	from goods	  
+  </select>
+  
+<!--  등록된 상품 리스트 -->
+  <select id="getGoodsList" parameterType="hashMap" resultType="GoodsVO">
+  	select *
+  	from goods
+  	order by gno desc
+  	limit #{displayPost}, #{postNum}
+  </select>
+
+<!-- 등록된 상품 상세보기 -->
+  <select id="goodsDetail" parameterType="int" resultType="GoodsVO">
+  	select *
+  	from goods
+  	where gno = #{gno}
+  </select>
+  
+<!--관리자-  등록된 상품 삭제 -->
+  <delete id="delete" parameterType="int">
+    delete from goods
+    where gno=#{gno}
+  </delete>
+  
+<!--  제재받지 않은 일반 회원의 수 -->
+  <select id="generalMemberCount" resultType="int">
+  	select count(id)
+  	from member
+  	where block=0
+  </select>
+  
+<!--  제재받지 않은 일반 회원 출력 -->
+  <select id="getGeneralMemberList" parameterType="hashMap" resultType="MemberVO">
+  	select *
+  	from member
+  	where block=0
+  	order by reg_date desc
+  	limit #{displayPost}, #{postNum}
+  </select>
+  
+<!--  제재중인 회원의 수 -->
+  <select id="restrictionMemberCount" resultType="int">
+  	select count(id)
+  	from member
+  	where block=1
+  </select>
+  
+<!--   제재중인 회원의 리스트 -->
+  <select id="getRestrictionMemberList" parameterType="hashMap" resultType="MemberVO">
+	select *
+  	from member
+  	where block=1
+  	order by reg_date desc
+  	limit #{displayPost}, #{postNum}
+  </select>
+  
+  <select id="underwayAuctionCount" resultType="int">
+  	select count(gno)
+	from goods
+	where actionstatus=1  
+  </select>
+  
+  
+  <!--  경매가 진행중인 상품 리스트 -->
+  <select id="getUnderwayAuctionList" parameterType="hashMap" resultType="GoodsVO">
+  	select *
+  	from goods
+  	where actionstatus=1
+  	order by gno desc
+  	limit #{displayPost}, #{postNum}
+  </select>
+  
+  <select id="closedAuctionCount" resultType="int">
+	  select count(gno)
+	  from goods
+	  where actionstatus=0
+  </select>
+
+<!-- 종료된 경매 리스트 -->
+  <select id="getClosedAuctionList" resultType="GoodsVO" parameterType="hashMap">
+	select *
+  	from goods
+  	where actionstatus=0
+  	order by gno desc
+  	limit #{displayPost}, #{postNum}
+  </select>  
+	
+</mapper>

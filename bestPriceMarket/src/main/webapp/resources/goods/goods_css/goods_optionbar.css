@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+
+.bo_w_select {
+    width: 40%; /* 가로 사이즈 */
+    padding: 10px; /* 내부여백 */
+    padding-left: 20px;
+   
+    border: 1px solid #ddd;
+    background: url(../goods_img/arrow_down_18dp.png) no-repeat right 50%; /* 화살표 위치 */
+    background-size: 30px; /* 화살표 크기 */
+    border-radius: 4px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 18px;
+    color: #000;
+    outline:none;
+}
+.bo_w_select:hover {border: 1px solid #aaa;} /* 마우스오버 */

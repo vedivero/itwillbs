@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DTD지정  -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.bestpricemarket.mappers.goodsMapper">
+  
+  <!-- 지은 ******************************************************************************************** -->
+    <!-- 상품등록 -->
+	<insert id="register" useGeneratedKeys="true" keyProperty="gno" parameterType="com.bestpricemarket.domain.GoodsVO">
+ 		insert into goods (category, g_m_id, gname, lowestprice, content, regDate, endDate) 
+ 		values (#{category},#{g_m_id},#{gname},#{lowestprice},#{content},now(),#{endDate})
+	</insert>  
+  	<!-- 상품등록 -->
+  	
+  	<!-- gno업데이트 -->
+  	<update id="setGno" >
+  	 update goods g
+	 set g.thumbnail = (select f_name 
+                   	   from goodsfile f
+				       where g.gno = f.f_g_gno)
+	 where g.gno =#{gno};                   
+  	</update>
+  	<!-- gno업데이트 -->
+  	
+  	<!-- 카테고리별 상품 목록 -->
+ 	<select id="category" resultType="com.bestpricemarket.domain.GoodsVO">
+ 		select * 
+ 		from goods 
+ 		where category = #{category} 
+ 		order by gno desc, regDate desc 
+ 		limit #{cri.pageStart},#{cri.pageSize}
+ 	</select>
+ 	<!-- 카테고리별 상품 분류 -->
+ 	
+ 	<!-- DB goods테이블에 있는 카테고리별 상품글의 개수 가지고 오는 처리 -->
+ 	<select id="categoryCount" resultType="int">
+ 	  select count(*) from goods where category = #{category}
+ 	</select>
+ 	<!-- DB goods테이블에 있는 카테고리별 상품글의 개수 가지고 오는 처리 -->
+ 	
+  	<!-- 상품조회 -->
+  	<select id="detailGoods" resultType="com.bestpricemarket.domain.GoodsVO">
+  		select * from goods where gno = #{gno} 
+  	</select>  
+  	<!-- 상품조회 -->
+  		
+  	<!-- 상품 수정 -->
+  	<update id="modifyGoods">
+  		update goods
+  		  set
+  		  	category = #{category},
+  		    gname = #{gname},
+  		    content = #{content},
+  		    endDate = #{endDate},
+  		    lowestprice = #{lowestprice}
+  		  where gno = #{gno}
+  	</update>  
+  	<!-- 상품 수정 -->
+  	
+  	<!-- 상품 삭제 -->
+  	<delete id="deleteGoods">
+  		delete from goods
+  		where gno = #{gno}
+  	</delete>
+  	<!-- 상품 삭제 -->
+  	
+  	<!-- 첨부파일업로드  -->
+	 <insert id="insertFile" parameterType="hashmap">
+		<![CDATA[
+			insert into goodsfile
+			 (f_g_gno,f_oname,f_name,f_size,crea_date,update_date) 
+			 values(#{gno},#{f_oname},#{f_name},#{f_size},sysdate(),sysdate())
+		]]>
+	</insert> 
+	<!-- 첨부파일업로드  -->
+	
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+		select fno, f_name, f_oname, round(f_size/1024,1) as f_size, del_chk
+		from goodsfile
+		where f_g_gno = #{gno}
+		and del_chk = 'N'
+		order by fno asc
+	</select>
+  	<!-- 첨부파일 조회 -->
+  	
+  	<!-- 첨부파일업로드 수정 -->
+  	 <update id="updateFile" parameterType="hashMap">
+  		update goodsfile set del_chk = 'Y' where fno = #{fno}
+  	</update> 
+  	<!-- 첨부파일업로드 수정 -->
+  	
+  	<!-- 첨부파일 다운로드 -->
+  	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+		select f_name, f_oname 
+		from goodsfile 
+		where fno = #{fno}
+	</select>
+  	<!-- 첨부파일 다운로드 -->
+  	
+  	<!-- 상품 테이블 현재 입찰가 업데이트 -->
+  	<update id="finalpriceupdate">
+  		update goods g
+  		set finalprice = (select max(p.pm_g_bidprice) 
+  						  from pricemonitoring p 
+  						  where p.pm_g_gno = g.gno)
+  		where g.gno = #{gno}
+  	</update>
+  	<!-- 상품 테이블 현재 입찰가 업데이트 -->
+  	
+  	<!-- 블락된 회원 가져오기 -->
+  	<select id="block" resultType="com.bestpricemarket.domain.MemberVO">
+  		select *
+  		from member
+  		where id=#{id} 
+  	</select> 
+  	<!-- 블락된 회원 가져오기 -->
+  
+  <!-- 재원 ******************************************************************************************** -->	
+     <!-- 상품신고 -->
+   	<select id="myInfo" resultType="com.bestpricemarket.domain.MemberVO">
+   		select * from member where id = #{id}
+   	</select>
+   
+  	<select id="showReportDetail" resultType="com.bestpricemarket.domain.ReportVO">
+  		select g.g_m_id, g.gname, g.gno, m.email
+  		from goods g
+  		join Member m
+  		on g.g_m_id = m.id
+  		where gno=#{gno}
+  	</select>
+  	<!-- 상품신고 -->
+
+ 	<!-- 입찰하기 -->
+  	<select id="getBidding" resultType="com.bestpricemarket.domain.PricemonitoringVO">
+  		select * from pricemonitoring where pm_g_gno = #{pm_g_gno} order by pm_g_bidprice desc,timelog desc limit 5
+  	</select>
+  	
+  	<select id="getMaxPrice" resultType="Integer">
+  		select max(pm_g_bidprice) from pricemonitoring where pm_g_gno = #{pm_g_gno}
+  	</select>
+  	
+  	<update id="updateStatus">
+  		update goods set actionstatus = 1 where gno = #{gno}
+  	</update>
+  	
+  	<update id="endStatus">
+  		update goods set actionstatus = 0 where gno = #{gno}
+  	</update>
+  
+  	<insert id="insertBidding">
+  		insert into pricemonitoring(pm_g_gno,pm_m_userid,pm_g_bidprice,timelog)
+  		values(#{pm_g_gno},#{pm_m_userid},#{pm_g_bidprice},#{timelog})
+  	</insert>
+  	
+  	<select id="gd_bidCount" resultType="Integer">
+  		select count(*)
+  		from pricemonitoring
+  		where pm_g_gno=#{pm_g_gno}
+  	</select>
+  	
+  	<update id="numofbid">
+  		update goods 
+		set numofbid = (select count(*)
+						from pricemonitoring
+						where pm_g_gno=#{pm_g_gno})
+		where gno=#{pm_g_gno};
+  	</update>
+	
+  	
+  	<!-- *************** 2020/11/16/월요일 낙찰정보 ************************** -->
+  	<!-- 낙찰한 사람의 정보 가져오기 -->
+  	<select id="getFinalBid" resultType="com.bestpricemarket.domain.finalBidVO">
+  		select p.pm_m_userid,p.pm_g_gno,g.endDate
+		from pricemonitoring p join goods g
+		on pm_g_gno = gno
+		where pm_g_gno = #{pm_g_gno}
+		order by pm_g_bidprice desc
+		limit 1
+  	</select>
+  	
+  	<!-- 낙찰정보 넣기 -->
+  	<insert id="insertMyAction">
+  		insert into myaction(a_m_id,a_g_gno,a_g_actionstatus,paystatus,deliverystatus,a_g_enddate,sellstatus)
+  		values(#{pm_m_userid},#{pm_g_gno},2,0,0,#{endDate},1)
+  	</insert>
+  	<!-- *************** 2020/11/16/월요일 낙찰정보끝 ************************** -->
+  
+	<!-- 검색하기 -->
+	<sql id="searchCondition">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and gname like concat('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and content like concat('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and g_m_id like concat('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and (gname like concat('%', #{keyword}, '%')
+					or content like concat('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'all'.toString()">
+				and (gname like concat('%', #{keyword}, '%')
+					or content like concat('%', #{keyword}, '%')
+					or g_m_id like concat('%', #{keyword}, '%'))
+			</if>
+		</if>
+	</sql>  
+	<!-- 검색하기 -->
+  
+   <!-- 태준 ******************************************************************************************** -->
+   <!-- 판매자의 다른상품 -->
+  	<select id="anothergoods" resultType="AnotherGoodsVO">
+		select g.gno,g.g_m_id,g.gname,f.f_name
+		from goods g
+		join goodsfile f
+		on g.gno = f.f_g_gno
+		where g_m_id = #{g_m_id} and f.f_name != ""
+		order by gno desc, regDate desc
+	</select>
+  	<!-- 판매자의 다른상품 -->
+   
+   <!-- 정현 ******************************************************************************************** -->
+   <!-- 좋아요 -->
+  <select id="countbyLike" parameterType="map" resultType="int">
+   SELECT COUNT(*)
+   FROM likes
+   where l_m_id = #{l_m_id} and l_g_gno = #{gno}
+  </select>
+
+  <insert id="create" parameterType="com.bestpricemarket.domain.LikesVO">
+    INSERT INTO likes(l_g_gno, l_m_id, l_m_actionstatus) 
+    values (#{l_g_gno}, #{l_m_id}, 0)  <!-- g_m_id 다시 확인 -->
+  </insert>
+    
+  <update id="goods_update">
+    UPDATE goods
+    SET glike = glike + 1 
+    WHERE gno = #{gno}  
+  </update>
+  
+  <select id="read" resultType="LikesVO">
+    SELECT lno, l_g_gno, l_m_id, l_m_actionstatus 
+    FROM likes 
+    WHERE gno=#{gno} AND l_m_id=#{l_m_id} <!-- 필요...??? -->
+  </select>
+  
+  <update id="deletebyGoods">
+    update goods 
+    set glike = glike-1
+    where gno = #{gno}
+  </update>
+  
+  <delete id="deletebyLikes">
+    DELETE FROM likes
+    WHERE l_g_gno = #{l_g_gno} and l_m_id = #{l_m_id}
+  </delete>
+   
+   <!-- 메인페이지 옵션바 -->
+  <select id="orderbyNew" resultType="com.bestpricemarket.domain.GoodsVO">
+   select *
+   from goods
+   where gno > 0 	
+   <include refid="searchCondition"></include>
+  	order by regDate desc	
+  	limit #{pageStart},#{pageSize}
+  </select>
+  
+  <select id="orderbyDuedate" resultType="com.bestpricemarket.domain.GoodsVO">
+   select * 
+   from goods
+   where gno > 0 	
+  <include refid="searchCondition"></include>
+  order by endDate	
+  limit #{pageStart},#{pageSize}   
+  </select>
+  
+  <select id="orderbyBest" resultType="com.bestpricemarket.domain.GoodsVO">
+   select *
+   from goods
+   where gno > 0 	
+  <include refid="searchCondition"></include>
+  order by numofbid desc 	
+  limit #{pageStart},#{pageSize}   
+  </select>
+   
+	<!-- 소원 ******************************************************************************************** -->
+  	<!-- 상품목록 -->	
+  	<select id="listGoods" resultType="com.bestpricemarket.domain.GoodsVO">	
+  		select * 	
+  		from goods 	
+  		where gno > 0 	
+  		<include refid="searchCondition"></include>
+  		order by gno desc, regDate desc 	
+  		limit #{pageStart},#{pageSize}	
+  	</select> 	
+  	
+  	<!-- DB goods테이블에 있는 모든 상품글의 개수 가지고 오는 처리 -->	
+ 	<select id="pageCount" resultType="int">	
+ 		select	
+ 		 count(*)	
+ 		from goods 
+ 		where gno > 0
+ 		<include refid="searchCondition"></include>	
+ 	</select>
+ 	
+ 	<!-- 입찰수 높은 상품 3가지 슬라이드로 출력 -->
+    <select id="top3goods" resultType="com.bestpricemarket.domain.GoodsVO">	
+  		select gno, thumbnail
+  		from goods 	
+  		order by numofbid desc
+  		limit 3
+  	</select> 
+  	
+  	<!-- 좋아요유지 -->
+  	<select id="isClickedLikeBtn" resultType="int">
+  		select count(*)
+  		from likes
+  		where l_g_gno = #{gno} and l_m_id =#{id}
+  	</select>
+  </mapper>

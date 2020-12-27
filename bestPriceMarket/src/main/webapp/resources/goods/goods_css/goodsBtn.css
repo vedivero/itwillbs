@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+/* 기본 버튼 */
+.Btn {
+    border-radius: 4px; 
+    background: #212529;
+    color: #fff;
+    padding: 6px 12px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: 20px;
+    border: solid 2px #212529; 
+    transition: all 0.5s ease-in-out 0s;
+}
+.Btn:hover,
+.Btn:focus {
+    background: transparent;
+    color: #212529;
+    text-decoration: none;
+    border: solid 2px #212529; 
+}
+/* 기본 버튼 */
+
+/* 수정 버튼 */
+.modify-btn {
+    border-radius: 4px; 
+    background: #FFC107;
+    color: #fff;
+    padding: 6px 12px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: 20px;
+    border: solid 2px #FFC107; 
+    transition: all 0.5s ease-in-out 0s;
+    text-align: center;
+}
+.modify-btn:hover,
+.modify-btn:focus {
+    background: transparent;
+    color: #212529;
+    text-decoration: none;
+    border: solid 2px #FFC107; 
+}
+
+/* 수정 버튼 */
+
+/* 삭제 버튼 */
+.delete-btn {
+    border-radius: 4px; 
+    background: #DC3545;
+    text-align: center;
+    color: #fff;
+    padding: 6px 12px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: 20px;
+    border: solid 2px #DC3545; 
+    transition: all 0.5s ease-in-out 0s;
+}
+.delete-btn:hover,
+.delete-btn:focus {
+    background: transparent;
+    color: #212529;
+    text-decoration: none;
+    border: solid 2px #DC3545; 
+}
+/* 삭제 버튼 */
+
+
+
+/* 상세페이지 수정 버튼 */
+.detail_modify-btn {
+    border-radius: 4px; 
+    background: #FFC107;
+    color: #fff;
+    padding: 7px 45px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: 20px;
+    border: solid 2px #FFC107; 
+    transition: all 0.5s ease-in-out 0s;
+    text-align: center;
+}
+.detail_modify-btn:hover,
+.detail_modify-btn:focus {
+    background: transparent;
+    color: #212529;
+    text-decoration: none;
+    border: solid 2px #FFC107; 
+}
+/* 상세페이지 수정 버튼 */
+
+/* 상세페이지 삭제 버튼 */
+.detail_delete-btn {
+    border-radius: 4px; 
+    background: #DC3545;
+    color: #fff;
+    padding: 7px 45px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: 20px;
+    border: solid 2px #DC3545; 
+    transition: all 0.5s ease-in-out 0s;
+    text-align: center;
+}
+.detail_delete-btn:hover,
+.detail_delete-btn:focus {
+    background: transparent;
+    color: #212529;
+    text-decoration: none;
+    border: solid 2px #DC3545; 
+}
+/* 상세페이지 삭제 버튼 */
+
+
+
+
+
+

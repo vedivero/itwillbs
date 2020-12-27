@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bestpricemarket.mapper.CSMapper">
+
+	<!-- 마지막 글 번호 찾는 쿼리문 -->
+	<select id="maxbno" resultType="int">
+		select max(csbno)
+		from csboard
+	</select>
+
+	<!-- 글 등록 후 ref와 bno를 같게 하는 쿼리 -->
+	<update id="bnoup">
+		update csboard
+		set cs_ref=#{csbno}
+		where csbno=#{csbno}
+	</update>
+
+	<!-- 글 등록 쿼리문 -->
+	<insert id="create">
+		insert into csboard
+		(cs_m_id,cs_subject,cs_content)
+		values
+		(#{cs_m_id},#{cs_subject},#{cs_content})
+	</insert>
+
+	<!--글 목록 불러오기 -->
+	<select id="listAll" resultType="CSVO">
+      <![CDATA[
+	     select csbno,cs_m_id,cs_subject,cs_content,cs_ref,cs_seq,cs_lev,cs_regdate,cs_file
+	  	 from csboard
+	     where csbno > 0 
+	   	 order by csbno desc, cs_regdate desc
+	   	 limit 11
+      ]]>
+	</select>
+
+	<!--csbno에 해당하는 정보 블러오기 -->
+	<select id="content" parameterType="int" resultType="CSVO">
+		select
+		*
+		from
+		csboard
+		where csbno = #{csbno}
+	</select>
+
+	<!-- 글 수정하기 -->
+	<update id="modify"
+		parameterType="com.bestpricemarket.domain.CSVO">
+		update csboard
+		set cs_subject = #{cs_subject},
+		cs_content = #{cs_content}
+		where csbno = #{csbno}
+	</update>
+
+	<!-- 글 삭제하기 -->
+	<delete id="delete" parameterType="int">
+		delete from csboard
+		where csbno = #{csbno}
+	</delete>
+
+	<!-- 등록된 글의 총 갯수 -->
+	<select id="count" resultType="int">
+		select count(csbno)
+		from csboard
+	</select>
+
+	<!-- 글 목록 + 페이징처리 -->
+	<select id="listPage" parameterType="hashMap" resultType="CSVO">
+		select
+		csbno,cs_m_id,cs_subject,cs_content,cs_ref,cs_seq,cs_lev,cs_regdate,cs_file
+		from csboard
+		order by cs_ref desc,cs_seq asc
+		limit #{displayPost}, #{postNum}
+	</select>
+
+	<insert id="replyCreate">
+		insert into csboard
+			(cs_m_id,cs_subject,cs_content,cs_ref,cs_lev,cs_seq)
+		values
+			(#{cs_m_id},#{cs_subject},#{cs_content},#{cs_ref},cs_lev+1,cs_seq+1)
+	</insert>
+	
+	<update id="united">
+		update csboard
+		set cs_ref=#{csbno}
+		where csbno=#{csbno}
+	</update>
+	
+
+</mapper>

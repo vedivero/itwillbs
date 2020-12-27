@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD지정  -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bestpricemarket.mappers.commentMapper">
+
+	<!-- 댓글 등록 -->
+	<insert id="commentInsert">
+	     insert into comment (c_m_id,c_g_gno,c_content,c_regdate)
+	     values(#{c_m_id},#{c_g_gno},#{c_content},now()) 
+	</insert>
+	
+	<!-- AI제약조건 있는 c_num가져오기 -->
+	<select id="getCnum" resultType="int">
+		select max(c_num) from comment
+	</select>
+
+	<!-- 댓글 리스트 -->
+	<select id = "commentList" resultType = "com.bestpricemarket.domain.GoodsCommentVO">
+	 select *
+	 from comment
+	 where c_g_gno = #{gno}
+	 order by c_ref asc, c_seq asc
+	</select>
+
+	<!-- 댓글 리스트 한개씩만 -->
+	<select id = "commentListEach" resultType = "com.bestpricemarket.domain.GoodsCommentVO">
+	 select *
+	 from comment
+	 where c_num = #{c_num}
+	</select>
+
+	<!-- 댓글수정  -->
+	<update id = "commentUpdate">
+		update comment set c_content = #{c_content}
+		where c_num = #{c_num} 
+	</update>
+
+	<!-- 댓글삭제  -->
+	<update id = "commentDelete">
+		update comment set c_content = #{c_content}, isDeleted = 1 
+		where c_num = #{c_num} 
+	</update>
+
+	<!-- c_ref와 c_num 싱크맞추기 -->
+	<update id="syncC_ref">
+		update comment set c_ref = #{c_num}
+		where c_num = #{c_num}
+	</update>
+	
+	<!-- 대댓글등록 -->
+	<insert id="rereplyInsert">
+	     insert into comment (c_m_id,c_g_gno,c_content,c_regdate,c_ref,c_seq)
+	     values(#{c_m_id},#{c_g_gno},'┗답글 '#{c_content},now(),#{c_ref},1) 
+	</insert>
+
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<!-- DriverManagerDataSource 객체 -->
+	<bean id="dataSource"
+	      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	   <property name="driverClassName" 
+	             value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+	   <property name="url" 
+	             value="jdbc:log4jdbc:mysql://localhost:3306/bestpricemarket?useSSL=false"/>
+	   <property name="username">
+	      <value>root</value>
+	   </property>   
+	   <property name="password">
+	       <value>1234</value>
+	   </property>       
+	</bean>	
+		
+	<!-- SqlSessionFactory 객체 (Connection + MyBatis 객체연결 역할, DB해제는 못하고 Connection해제만 가능)-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+       <property name="dataSource" ref="dataSource" />
+       <property name="configLocation" value="classpath:/Mybatis-config.xml" />
+       <property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml" />    
+    </bean>
+	
+	<!-- SqlSesstionTemplate 객체 (DB연결/해제(pstmt, resultset포함 해제가능) 역할)-->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<!-- DAO패키지와 연결  -->
+	<context:component-scan base-package="com.bestpricemarket.persistence" />
+	
+	<!-- 서비스패키지와 연결  -->
+	<context:component-scan base-package="com.bestpricemarket.service" />
+	
+	<!-- utils 패키지와 연결 - 파일업로드 -->
+	<context:component-scan base-package="com.bestpricemarket.utils" />
+
+	<!-- Gmail -->
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="bestpricemarketnoreply@gmail.com" />
+		<property name="password" value="bestpricemarket123!" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+		
+</beans>

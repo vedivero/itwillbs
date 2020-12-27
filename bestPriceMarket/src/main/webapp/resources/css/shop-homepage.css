@@ -1,0 +1,34 @@
+/*!
+ * Start Bootstrap - Shop Homepage (https://startbootstrap.com/templates/shop-homepage)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
+ */
+body {
+  padding-top: 56px;
+}
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+select{
+    font-family: 'FontAwesome' , 'TATSanaChon';
+}
+
+.btn-search {
+  background-color: #212529;
+  font: bold;
+  color: white;
+  transition-duration: 0.4s;
+  border: 2px solid;
+  border-radius: 5px;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.btn-search:hover {
+  background-color: white; /* Green */
+  color: black;
+}
